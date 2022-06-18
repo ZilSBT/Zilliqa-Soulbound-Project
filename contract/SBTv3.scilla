@@ -1,0 +1,578 @@
+(* SPDX-License-Identifier: MIT *)
+scilla_version 0
+
+(***************************************************)
+(*               Associated library                *)
+(***************************************************)
+import BoolUtils ListUtils IntUtils
+library SoulBoundToken
+
+type Operation =
+| Add
+| Sub
+
+(* Global variables *)
+let zero_address = 0x0000000000000000000000000000000000000000
+let false = False
+let true = True
+let zero = Uint256 0
+let one = Uint256 1
+let empty_string = ""
+
+let add_operation = Add
+let sub_operation = Sub
+let min_fee_bps = Uint128 1
+let max_fee_bps = Uint128 10000
+
+(* Library functions *)
+let one_msg = 
+  fun (msg: Message) => 
+    let nil_msg = Nil {Message} in
+    Cons {Message} msg nil_msg
+
+let two_msgs =
+  fun (msg1: Message) =>
+  fun (msg2: Message) =>
+    let msgs_tmp = one_msg msg2 in
+    Cons {Message} msg1 msgs_tmp
+
+let get_bal =
+  fun (maybe_bal: Option Uint256) =>
+    match maybe_bal with
+    | None => zero
+    | Some bal => bal
+    end
+
+(* Error exception *)
+type Error =
+  | NotPausedError
+  | PausedError
+  | SelfError
+  | NotContractOwnerError
+  | NotMinterError
+  | NotOwnerOrOperatorError
+  | ZeroAddressDestinationError
+  | NotContractOwnershipRecipientError
+  | MoreThanOneTokenError
+  | LessThanOneTokenError
+
+let make_error =
+  fun (result: Error) =>
+    let result_code = 
+      match result with
+      | NotPausedError                     => Int32 -1
+      | PausedError                        => Int32 -2
+      | SelfError                          => Int32 -3
+      | NotContractOwnerError              => Int32 -4
+      | NotMinterError                     => Int32 -5
+      | NotOwnerOrOperatorError            => Int32 -6
+      | ZeroAddressDestinationError        => Int32 -7
+      | NotContractOwnershipRecipientError => Int32 -8
+      | MoreThanOneTokenError              => Int32 -9
+      | LessThanOneTokenError              => Int32 -10
+      end
+    in
+    { _exception: "Error"; code: result_code }
+
+
+(***************************************************)
+(*             The contract definition             *)
+(***************************************************)
+
+contract SoulBoundToken
+(
+  initial_contract_owner: ByStr20,
+  initial_base_uri: String, (*website *)
+  name: String,
+  symbol: String
+)
+
+(* Contract constraints *)
+with
+  (* `initial_contract_owner` must not be the zero address *)
+  let is_contract_owner_invalid = builtin eq initial_contract_owner zero_address in
+  (* `name` must not be an empty string *)
+  let is_name_invalid = builtin eq name empty_string in
+  (* `symbol` must not be an empty string *)
+  let is_symbol_invalid = builtin eq symbol empty_string in
+  (* Check if any parameter is invalid *)
+  let is_name_or_symbol_invalid = orb is_name_invalid is_symbol_invalid in
+
+  let is_invalid = orb is_contract_owner_invalid is_name_or_symbol_invalid in
+  negb is_invalid
+=>
+
+(* Mutable fields *)
+
+(* Emergency stop mechanism *)
+(* Defaults to False *)
+field is_paused: Bool = false
+
+(* Contract Owner *)
+(* Defaults to `initial_contract_owner` *)
+field contract_owner: ByStr20 = initial_contract_owner
+
+(* Contract ownership recipient *)
+(* Defaults to `zero_address` *)
+field contract_ownership_recipient: ByStr20 = zero_address
+
+(* The total number of existing tokens *)
+field total_supply: Uint256 = Uint256 0
+
+(* Mapping from token owner to their balance  *)
+(* Address to Balance*)
+field balances: Map ByStr20 Uint256 = Emp ByStr20 Uint256
+
+(* Mapping from token ID (totalsupply+1 at minting) to its owner address *)
+(* TokenId to Address *)
+field token_owners: Map Uint256 ByStr20 = Emp Uint256 ByStr20
+
+(* Mapping from to its owner to token ID (total supply at minting)  *)
+(* Address to token id *)
+field token_ids: Map ByStr20 Uint256 = Emp ByStr20 Uint256 
+
+(* Token URIs *)
+(* Address to its uri *)
+field token_uris: Map ByStr20 String = Emp ByStr20 String
+
+field twitter: Map ByStr20 String = Emp ByStr20 String
+
+field facebook: Map ByStr20 String = Emp ByStr20 String
+
+(* Emit Errors *)
+procedure Throw(error: Error)
+  e = make_error error;
+  throw e
+end
+procedure RequireContractOwner()
+  cur_owner <- contract_owner;
+  is_contract_owner = builtin eq cur_owner _sender;
+  match is_contract_owner with
+  | True => 
+  | False =>
+    error = NotContractOwnerError;
+    Throw error
+  end
+end
+
+procedure RequireNotSelf(address_a: ByStr20, address_b: ByStr20)
+  is_self = builtin eq address_a address_b;
+  match is_self with
+  | False =>
+  | True =>
+    error = SelfError;
+    Throw error
+  end
+end
+
+procedure RequireSelf(address_a: ByStr20, address_b: ByStr20)
+  is_self = builtin eq address_a address_b;
+  match is_self with
+  | False =>
+    error = SelfError;
+    Throw error
+  | True =>
+  end
+end
+
+procedure RequireNotPaused()
+  (* Reference: *)
+  (* https://consensys.github.io/smart-contract-best-practices/general_philosophy/#prepare-for-failure *)
+  paused <- is_paused;
+  match paused with
+  | False =>
+  | True =>
+    (* Contract is paused *)
+    error = PausedError;
+    Throw error
+  end
+end
+
+(*Increments/Decrements address's balance depending on op *)
+procedure UpdateBalance(operation: Operation, address: ByStr20)
+  match operation with
+  | Add =>
+    maybe_count <- balances[address];
+    new_count = 
+      let cur_count = get_bal maybe_count in
+      (* if overflow occurs, it throws CALL_CONTRACT_FAILED *)
+      builtin add cur_count one;
+    balances[address] := new_count
+  | Sub =>
+    maybe_count <- balances[address];
+    new_count = 
+      let cur_count = get_bal maybe_count in
+      (* if underflow occurs, it throws CALL_CONTRACT_FAILED *)
+      builtin sub cur_count one;
+    balances[address] := new_count
+  end
+end
+
+(* Set URI for a given address *)
+procedure SetTokenURI(to: ByStr20, token_uri: String)
+  is_empty_string = builtin eq token_uri empty_string;
+  match is_empty_string with 
+  | True => 
+    (* noop *)
+  | False =>
+    token_uris[to] := token_uri
+  end
+end
+
+procedure RequireValidDestination(to: ByStr20)
+  (* Reference: https://github.com/ConsenSys/smart-contract-best-practices/blob/master/docs/tokens.md *)
+  is_zero_address = builtin eq to zero_address;
+  match is_zero_address with
+  | False =>
+  | True =>
+    error = ZeroAddressDestinationError;
+    Throw error
+  end
+end
+
+(* Verifies user doesnt already have token  *)
+procedure HasNoToken(to: ByStr20)
+  tokenbalance <- balances[to];
+  balance = get_bal tokenbalance;
+  owns_token = builtin eq balance zero;
+  match owns_token with
+  | False => 
+    error = MoreThanOneTokenError;
+    Throw error
+    | True =>
+    (* noop *)
+  end
+end
+
+(* Verifies user has a token to burn  *)
+procedure HasToken(to: ByStr20)
+  tokenbalance <- balances[to];
+  balance = get_bal tokenbalance;
+  owns_token = builtin eq balance zero;
+  match owns_token with
+  | False => 
+    (* noop *)
+    | True =>
+    error = LessThanOneTokenError;
+    Throw error
+  end
+end
+
+(* @Requirements: *)
+(* - `to` must not be the zero address. Otherwise, it must throw `ZeroAddressDestinationError` *)
+procedure MintToken(to: ByStr20)
+ (*Check that address is valid*)
+  RequireValidDestination to;
+ (*Check that address doesnt have sbt*)
+  HasNoToken to;
+
+ (* add one to the total supply *)
+  current_supply <- total_supply;
+  new_supply = builtin add current_supply one;
+  total_supply := new_supply;
+  token_id = new_supply;
+
+  (* mint a new token *)
+  token_owners[token_id] := to;
+  token_ids[to] := token_id;
+  (* add one to the token owner balance *)
+  UpdateBalance add_operation to
+  
+end
+
+procedure BurnToken(to: ByStr20 ,token_id: Uint256)
+  
+  (* Destroy existing token *)
+  delete token_owners[token_id];
+  delete token_uris[to];
+  delete token_ids[to];
+
+  (* subtract one from the balance *)
+  UpdateBalance sub_operation to;
+  (* Delete the addresses balance (likely redundant) *)
+  delete balances[to];
+
+  (* subtract one from the total supply *)
+  current_supply <- total_supply;
+  new_supply = builtin sub current_supply one;
+  total_supply := new_supply;
+
+  e = {
+    _eventname: "Burn";
+    token_owner: to;
+    token_id: token_id
+  };
+  event e
+end
+
+(* Mints a token with a specific `token_uri` and transfers it to `to`. *)
+(* Pass empty string to `token_uri` to use the concatenated token URI. i.e. `<base_uri><token_id>`. *)
+(* @param: to - Address of the token recipient *)
+(* @param: token_uri - URI of a token *)
+(* @Requirements: *)
+(* - The contract must not be paused. Otherwise, it must throw `PausedError` *)
+transition Mint(to: ByStr20, token_uri: String)
+(* TODO ADD EXTRA PARAMETERS  *)
+  RequireNotPaused; 
+  MintToken to; 
+  SetTokenURI to token_uri;
+  token_id <- total_supply; 
+
+  e = {
+    _eventname: "Mint";
+    to: to;
+    token_id: token_id;
+    token_uri: token_uri
+  };
+  event e;
+  msg_to_recipient = {
+    _tag: "ZSBT_RecipientAcceptMint";
+    _recipient: to;
+    _amount: Uint128 0
+  };
+  msg_to_sender = {
+    _tag: "ZSBT_MintCallback";
+    _recipient: _sender;
+    _amount: Uint128 0;
+    to: to;
+    token_id: token_id;
+    token_uri: token_uri
+  };
+  msgs = two_msgs msg_to_recipient msg_to_sender;
+  send msgs
+end
+
+
+(* @param: to  - The address of the burner  *)
+(* @Requirements: *)
+(* - The contract must not be paused. Otherwise, it must throw `PausedError` *)
+(* - The contract must be called by the address that is passed in as Parameter *)
+transition Burn(to: ByStr20)
+
+  RequireSelf to _sender;
+  RequireNotPaused;
+  (*Check that address is valid*)
+  RequireValidDestination to;
+  (*Check that address has sbt*)
+  HasToken to;
+
+  temp_id <- token_ids[to]; 
+
+  token_id= get_bal temp_id; 
+  
+ BurnToken to token_id;
+
+  msg_to_sender = {
+  _tag: "ZSBT_BurnCallback";
+  _recipient: _sender;
+  _amount: Uint128 0;
+  token_owner: to;
+  token_id: token_id
+  };
+  msgs = one_msg msg_to_sender;
+  send msgs
+
+end
+
+(* Pauses the contract. Use this when things are going wrong ('circuit breaker'). *)
+(* @Requirements: *)
+(* - The contract must not be paused. Otherwise, it must throw `PausedError` *)
+(* - `_sender` must be the contract owner. Otherwise, it must throw `NotContractOwnerError` *)
+transition Pause()
+  RequireNotPaused;
+  (* RequireContractOwner;  Maybe add this later.  *)
+
+  is_paused := true;
+  e = {
+    _eventname: "Pause";
+    is_paused: true
+  };
+  event e;
+  msg_to_sender = {
+    _tag: "ZSBT_PauseCallback";
+    _recipient: _sender;
+    _amount: Uint128 0;
+    is_paused: true
+  };
+  msgs = one_msg msg_to_sender;
+  send msgs
+end
+
+(* Unpauses the contract. *)
+(* @Requirements: *)
+(* - The contract must be paused. Otherwise, it must throw `NotPausedError` *)
+(* - `_sender` must be the contract owner. Otherwise, it must throw `NotContractOwnerError` *)
+transition Unpause()
+
+  paused <- is_paused;
+  match paused with
+  | True =>
+  | False =>
+    error = NotPausedError;
+    Throw error
+  end;
+  (* RequireContractOwner; *)
+
+  is_paused := false;
+  e = {
+    _eventname: "Unpause";
+    is_paused: false
+  };
+  event e;
+  msg_to_sender = {
+    _tag: "ZSBT_UnpauseCallback";
+    _recipient: _sender;
+    _amount: Uint128 0;
+    is_paused: false
+  };
+  msgs = one_msg msg_to_sender;
+  send msgs
+end
+
+(* Sets `to` as the contract ownership recipient. *)
+(* To reset `contract_ownership_recipient`, use `zero_address`. *)
+(* i.e., `0x0000000000000000000000000000000000000000` *)
+(* @param: to - Address of contract ownership recipient *)
+(* @Requirements: *)
+(* - `_sender` must be the contract owner. Otherwise, it must throw `NotContractOwnerError` *)
+(* - `_sender` must not be `to`. Otherwise, it must throw `SelfError` *)
+transition SetContractOwnershipRecipient(to: ByStr20)
+  RequireContractOwner;
+  RequireNotSelf to _sender;
+  
+  contract_ownership_recipient := to;
+
+  e = {
+    _eventname: "SetContractOwnershipRecipient";
+    to: to
+  };
+  event e;
+  msg_to_sender = {
+    _tag: "ZSBT_SetContractOwnershipRecipientCallback";
+    _recipient: _sender;
+    _amount: Uint128 0;
+    to: to
+  };
+  msgs = one_msg msg_to_sender;
+  send msgs
+end
+
+(* Sets `contract_ownership_recipient` as the contract owner. *)
+(* @Requirements: *)
+(* - `_sender` must be the contract ownership recipient. Otherwise, it must throw `NotContractOwnershipRecipientError` *)
+transition AcceptContractOwnership()
+  recipient <- contract_ownership_recipient;
+
+  is_recipient = builtin eq _sender recipient;
+  match is_recipient with
+  | False =>    
+    error = NotContractOwnershipRecipientError;
+    Throw error
+  | True =>
+    contract_owner := _sender;
+    contract_ownership_recipient := zero_address;
+
+    e = {
+      _eventname: "AcceptContractOwnership";
+      contract_owner: _sender
+    };
+    event e;
+    msg_to_sender = {
+      _tag: "ZSBT_AcceptContractOwnershipCallback";
+      _recipient: _sender;
+      _amount: Uint128 0;
+      contract_owner: _sender
+    };
+    msgs = one_msg msg_to_sender;
+    send msgs
+  end
+end
+
+
+(* TODO ADD GETTERS AND SETTERS FOR DATA  *)
+
+
+(*get balance by address returns a boolean value*)
+(*@Requirements*)
+(*Address cannot be burn address*)
+
+transition getAddress(token_id: Uint256)
+  (*Check that address has sbt*)
+  to <- token_owners[token_id];
+
+  e = {
+    _eventname: "getAddress";
+    to: to;
+    token_id: token_id
+  };
+  event e;
+  msg_to_recipient = {
+    _tag: "ZSBT_getAddress";
+    _recipient: _sender;
+    _amount: Uint128 0
+  };
+  msg_to_sender = {
+    _tag: "ZSBT_getAddress";
+    _recipient: _sender;
+    _amount: Uint128 0;
+    to: _sender;
+    token_id: token_id
+  };
+  msgs = two_msgs msg_to_recipient msg_to_sender;
+  send msgs
+end
+
+(*get tokenid by address*)
+(*@Requirements*)
+transition getTokenId(address: ByStr20)
+   (*Check that address has sbt*)
+  token_id <- token_ids[address];
+
+  e = {
+    _eventname: "getId";
+    address: address;
+    token_ids: token_id
+  };
+  event e;
+  msg_to_recipient = {
+    _tag: "ZSBT_getId";
+    _recipient: _sender;
+    _amount: Uint128 0
+  };
+  msg_to_sender = {
+    _tag: "ZSBT_getId";
+    _recipient: _sender;
+    _amount: Uint128 0;
+    address: _sender;
+    token_id: token_id
+  };
+  msgs = two_msgs msg_to_recipient msg_to_sender;
+  send msgs
+end
+
+(*get balance by address*)
+(*@Requirements*)
+transition getBalance(address: ByStr20)
+  balance <- balances[address];
+  
+  e = {
+    _eventname: "getBalance";
+    address: address;
+    balance: balance
+  };
+  event e;
+  msg_to_recipient = {
+    _tag: "ZSBT_getBalance";
+    _recipient: _sender;
+    _amount: Uint128 0
+  };
+  msg_to_sender = {
+    _tag: "ZSBT_getBalance";
+    _recipient: _sender;
+    _amount: Uint128 0;
+    address: _sender;
+    balance: balance
+  };
+  msgs = two_msgs msg_to_recipient msg_to_sender;
+  send msgs
+end
