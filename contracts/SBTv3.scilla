@@ -17,6 +17,8 @@ let false = False
 let true = True
 let zero = Uint256 0
 let one = Uint256 1
+let two = Uint256 2
+let three = Uint256 3
 let empty_string = ""
 
 let add_operation = Add
@@ -118,6 +120,7 @@ field contract_owner: ByStr20 = initial_contract_owner
 field contract_ownership_recipient: ByStr20 = zero_address
 
 (* The total number of existing tokens *)
+(*Assuming that we're not capping the supply at start*)
 field total_supply: Uint256 = Uint256 0
 
 (* Mapping from token owner to their balance  *)
@@ -127,8 +130,16 @@ field balances: Map ByStr20 Uint256 = Emp ByStr20 Uint256
 (* Token URIs *)
 (* Address[0] == ProfilePictureURI*)
 (* Address[1] == ProfileDataURI*)
+(* Address[2] == AchievementURI*)
 field token_uris: Map ByStr20 (Map Uint256 String)
   = Emp ByStr20 (Map Uint256 String)
+
+(*AchievementURI set as empty string*)
+field AchievementURI: String = String empty_string
+
+(*AchievementBool set as string "false"*)
+(*@DEV: Frontend will need to read string to display achievement*)
+field AchievementBool: String = String "false"
 
 (* Emit Errors *)
 procedure Throw(error: Error)
@@ -200,6 +211,7 @@ procedure UpdateBalance(operation: Operation, address: ByStr20)
 end
 
 (* Set URI for a given address *)
+(*AchievementURI should be an empty string*)
 procedure SetURI(to: ByStr20, picture_uri: String , data_uri: String)
   is_profile_empty_string = builtin eq picture_uri empty_string;
   is_data_empty_string = builtin eq data_uri empty_string;
@@ -211,8 +223,22 @@ procedure SetURI(to: ByStr20, picture_uri: String , data_uri: String)
     Throw error
   | False =>
     token_uris[to][zero] := picture_uri;
-    token_uris[to][one] := data_uri
+    token_uris[to][one] := data_uri;
+    token_uris[to][two] := AchievementURI;
+    token_uris[to][three] := AchievementBool
   end
+end
+
+
+(* Set achievementURI from empty string to AchievementURI*)
+(* Should only be callable from another contract *)
+procedure GetAchievement(uri)
+  (*Require Token owner or contract owner*)
+  (*Require hasAchievement*)
+
+  (*Set AchievementURI string to "true"*)
+  token_uris[_sender][three] := "true" 
+
 end
 
 procedure RequireValidDestination(to: ByStr20)
@@ -254,11 +280,17 @@ procedure HasToken(to: ByStr20)
   end
 end
 
+(*Verifies user has an achievement*)
+(*TODO*)
+procedure hasAchievement(to: ByStr20)
+end
+
 (* @Requirements: *)
 (* - `to` must not be the zero address. Otherwise, it must throw `ZeroAddressDestinationError` *)
 procedure MintToken(to: ByStr20)
  (*Check that address is valid*)
   RequireValidDestination to;
+
  (*Check that address doesnt have sbt*)
   HasNoToken to;
 
@@ -277,10 +309,15 @@ procedure BurnToken(to: ByStr20)
   (* Destroy existing token *)
   delete token_uris[to][zero];
   delete token_uris[to][one];
+  delete token_uris[to][two];
+  delete token_uris[to][three];
+
   (* subtract one from the balance *)
   UpdateBalance sub_operation to;
+
   (* Delete the addresses balance (likely redundant) *)
   delete balances[to];
+
   (* subtract one from the total supply *)
   current_supply <- total_supply;
   new_supply = builtin sub current_supply one;
@@ -313,7 +350,9 @@ transition Mint(to: ByStr20, picture_uri: String, data_uri: String)
     to: to;
     totalsupply_at_mint: totalsupply_at_mint;
     picture_uri: picture_uri;
-    data_uri: data_uri
+    data_uri: data_uri;
+    achievement_uri: AchievementURI;
+    achievement_bool: AchievementBool
   };
   event e;
 
@@ -323,7 +362,9 @@ transition Mint(to: ByStr20, picture_uri: String, data_uri: String)
     _amount: Uint128 0;
     to: to;
     picture_uri: picture_uri;
-    data_uri: data_uri
+    data_uri: data_uri;
+    achievement_uri: AchievementURI;
+    achievement_bool: AchievementBool
   };
   
   msgs = one_msg msg_to_sender;
@@ -400,6 +441,32 @@ transition ChangeData(to: ByStr20 , data_uri: String)
   };
   msgs = one_msg msg_to_sender;
   send msgs
+end
+
+
+(* Sets the mutable AchievementURI for whole contract *)
+transition SetAchievementURI(uri: String)
+  RequireNotPaused;
+  RequireContractOwner;
+  
+  (*TODO: Require not empty string*)
+
+  AchievementURI := uri;
+
+  e = {
+      _eventname: "SetAchievementURI";
+      AchievementURI: uri
+  };
+  event e;
+  msg_to_sender = {
+    _tag: "SBT_SetAchievementURI"
+    _recipient: _sender;
+    _amount: Uint128 0;
+    is_paused: true
+  };
+  msgs = one_msg msg_to_sender;
+  send msgs
+
 end
 
 (* Pauses the contract. Use this when things are going wrong ('circuit breaker'). *)
