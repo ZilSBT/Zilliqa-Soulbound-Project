@@ -46,7 +46,7 @@ const ZilliqaProvider = ({ children }: { children: ReactNode }) => {
         throw new Error("Zilliqa client is not initialized");
       }
       // TODO: Move contract address to .env
-      const contract = await zilliqaClient.contracts.at(
+      const contract = await window.zilPay.contracts.at(
         "0xf6fc98103b75c7e6b2b690e3419f66360ba32e8b"
       );
       return contract.call(transition, args, { ...TX_PARAMS, ...params });
