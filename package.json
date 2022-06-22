@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/ZilSBT/Zilliqa-Soulbound-Project#readme",
   "dependencies": {
-    "@pinata/sdk": "^1.1.26",
     "@types/jest": "^28.1.1",
     "@zilliqa-js/scilla-json-utils": "^0.2.0",
     "@zilliqa-js/zilliqa": "^3.3.4",
