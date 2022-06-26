@@ -59,7 +59,7 @@ function WalletProvider({ children }: Props) {
       await zilPay.wallet.connect();
       setWallet(zilPay.wallet);
     } else {
-        
+      // set a state notinstalled
       alert("Install ZillPay Wallet"); //TODO: Show a react dialouge, tell users to install zilpay wallet
 
     }
