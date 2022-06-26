@@ -21,7 +21,7 @@ export default function AppContainer() {
   // call the useWallet hook to get that newly created state value
   // state controls whether the dialog is opened
   const [modalIsOpen, setIsOpen] = useState(false);
-
+  const { zilpayinstalled } = useWallet();
   function openModal() {
     setIsOpen(true);
   }
@@ -33,7 +33,7 @@ export default function AppContainer() {
   return (
     <div>
       <Modal
-        isOpen = {useWallet.zilpayinstalled} //How do I read state from walletprovider?
+        isOpen = {zilpayinstalled} //How do I read state from walletprovider?
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Modal"
