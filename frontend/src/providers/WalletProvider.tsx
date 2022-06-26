@@ -16,6 +16,7 @@ declare global {
     zilPay?: {
       contracts: Contracts;
       wallet: any;
+      zilpayinstalled: boolean;
     };
   }
 }
@@ -27,6 +28,7 @@ interface Props {
 interface WalletProviderValue {
   // update this
   wallet: any;
+  zilpayinstalled: boolean;
   connect: () => void;
   disconnect: () => void;
   callContract: (transition: string, args: Value[], params?: CallParams) => Promise<Transaction>
@@ -37,7 +39,7 @@ const walletProvider = createContext<WalletProviderValue>(null as any);
 function WalletProvider({ children }: Props) {
   const [wallet, setWallet] = useState<any>();
   // another state zilpay installed or not
-
+  const zilpayinstalled: boolean = false;
   const zilPay = window.zilPay;
 
   const callContract = useCallback(
@@ -58,9 +60,10 @@ function WalletProvider({ children }: Props) {
     if (zilPay) {
       await zilPay.wallet.connect();
       setWallet(zilPay.wallet);
+      
     } else {
         
-      alert("Install ZillPay Wallet"); //TODO: Show a react dialouge, tell users to install zilpay wallet
+      alert("Install ZillPay Wallet"); //TODO: Show a modal, tell users to install zilpay wallet
 
     }
   }, [zilPay]);
@@ -73,10 +76,10 @@ function WalletProvider({ children }: Props) {
   }, [zilPay]);
 
   const value = useMemo(() => {
-    return { wallet, connect, disconnect, callContract, 
+    return { wallet, connect, disconnect, callContract, zilpayinstalled 
       // return the newly created state
     };
-  }, [wallet, connect, disconnect, callContract]);
+  }, [wallet, connect, disconnect, callContract, zilpayinstalled]);
 
   return (
     <walletProvider.Provider value={value}>{children}</walletProvider.Provider>

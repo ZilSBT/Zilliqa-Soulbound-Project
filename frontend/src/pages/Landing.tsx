@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import Modal from 'react-modal';
 
 export default function Landing() {
   return (
-    <div>Landing</div>
+    <Modal isOpen={true}></Modal>
   )
 }
