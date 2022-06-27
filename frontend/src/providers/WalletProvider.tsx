@@ -28,7 +28,7 @@ interface Props {
 interface WalletProviderValue {
   // update this
   wallet: any;
-  zilpayinstalled: boolean;
+  zilpayinstalled: any;
   connect: () => void;
   disconnect: () => void;
   callContract: (transition: string, args: Value[], params?: CallParams) => Promise<Transaction>
