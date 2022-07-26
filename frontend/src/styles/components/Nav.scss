@@ -1,0 +1,32 @@
+nav {
+  padding: 30px 30px;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    // h4
+    font-size: 1.563rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $white;
+    font-style: italic;
+    font-weight: 700;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    a {
+      text-decoration: none;
+    }
+  }
+}
+.logo {
+  margin-left: 1rem;
+  display: inline-block;
+  margin-bottom: -8px;
+}

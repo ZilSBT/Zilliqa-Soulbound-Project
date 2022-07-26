@@ -37,7 +37,7 @@ const App = () => {
                   <Route path="/educational" element={<Educational />} />
                 </Route>
               </Routes>
-              <WalletModal></WalletModal>
+              {/* <WalletModal></WalletModal> */}
             </ColorModeProvider>
           </PinataProvider>
         </Web3StorageProvider>

@@ -1,0 +1,24 @@
+.hero {
+  .left {
+    p {
+      max-width: 60%;
+      margin-bottom: calc(1em / 1.5);
+    }
+  }
+}
+
+// social proof
+.social-proof {
+  padding: 0.8rem 30px;
+  background-color: $medium-gray;
+  svg {
+    width: 250px;
+  }
+}
+// why us
+.why-us {
+  .flex {
+    margin-bottom: 2rem;
+  }
+}
+//
