@@ -81,7 +81,9 @@ export default function Profiles() {
                 {balance}
               </p>
             </div>
+            <a className="text-white" href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20profile%20on%20Zilsbt%3A%0A%0Ahttp%3A//localhost%3A3000/profiles/${address}`}>
             <Icon icon="ci:share" width="30" />
+            </a>
           </div>
         </div>
       </div>
