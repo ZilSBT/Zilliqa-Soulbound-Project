@@ -63,6 +63,7 @@ const DropArea = () => {
   );
   const { storeFiles, storeJson } = useStorage();
   const { wallet, callContract } = useWallet();
+  const [minting, setMinting] = useState<boolean>(false);
   // const { callContract } = useZilliqa();
   const [err, setErr] = useState<string | boolean>(false);
   const [file, setFile] = useState<File | null>(null);
@@ -90,6 +91,7 @@ const DropArea = () => {
     }, 30000);
   };
   const onSubmit = handleSubmit(async ({ walletAddress, ...data }) => {
+    setMinting(true);
     //TODO : input validation before creating links
 
     const imageURI = await storeFiles(file);
@@ -113,7 +115,8 @@ const DropArea = () => {
     const message = await transitionMessageAlert(
       zilPay,
       tx.ID,
-      "Creating user"
+      "Creating user",
+      setMinting
     );
     console.log(message);
     // TODO: Check for transaction conformation
@@ -249,7 +252,7 @@ const DropArea = () => {
                 ) : (
                   <Button type="submit" className={styles.uploadButton}>
                     <AiOutlineBlock className="scale-150" />
-                    Mint
+                    {minting ? "Minting" : "Mint"}
                   </Button>
                 )}
               </div>

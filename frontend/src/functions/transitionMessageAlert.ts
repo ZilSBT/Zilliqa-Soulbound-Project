@@ -11,7 +11,8 @@ Shows message as per messages codes.
 const transitionMessageAlert = async (
   zilPay: any,
   transactionId: string,
-  transitionName: string
+  transitionName: string,
+  loader: any
 ) => {
   console.log("Ivan wants to say log ");
   const transition = new Promise<string>((success, error) => {
@@ -19,6 +20,7 @@ const transitionMessageAlert = async (
     const subscription = zilPay.wallet
       .observableTransaction(transactionId)
       .subscribe(async (hash: any) => {
+        loader(false);
         console.log("Subscribe exe");
         subscription.unsubscribe();
         // // debugger;

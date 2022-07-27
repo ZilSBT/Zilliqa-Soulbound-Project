@@ -61,6 +61,7 @@ function WalletProvider({ children }: Props) {
   );
 
   const connect = useCallback(async () => {
+    const zilPay = window.zilPay;
     if (zilPay) {
       await zilPay.wallet.connect();
       setWallet(zilPay.wallet);
