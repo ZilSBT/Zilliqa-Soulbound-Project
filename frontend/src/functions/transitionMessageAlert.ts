@@ -24,22 +24,22 @@ const transitionMessageAlert = async (
         console.log("Subscribe exe");
         subscription.unsubscribe();
         // // debugger;
-        // try {
-        //   const Tx = await zilPay.blockchain.getTransaction(hash[0]);
-        //   const code = Tx.receipt.transitions[0].msg.params[0].value;
-        //   const message = decodeMessage(code);
-        //   console.log(message);
-        //   if (message.type === "success") {
-        //     success(message.alert);
-        //   }
-        //   error(message.alert);
-        // } catch (err) {
-        //   error("Transaction error");
-        // }
+        try {
+          const Tx = await zilPay.blockchain.getTransaction(hash[0]);
+          const code = Tx.receipt.transitions[0].msg.params[0].value;
+          const message = decodeMessage(code);
+          console.log(message);
+          if (message.type === "success") {
+            success(message.alert);
+          }
+          error(message.alert);
+        } catch (err) {
+          error("Transaction error");
+        }
       });
   });
-  const variable = await transition;
-  return variable;
+  // const variable = await transition;
+  // return variable;
 
   toast.promise(transition, {
     loading: `${transitionName}`,

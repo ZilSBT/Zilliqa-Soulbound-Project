@@ -72,7 +72,7 @@ function WalletProvider({ children }: Props) {
       document.getElementById("walletModal")?.classList.toggle("hidden");
       document.getElementById("walletModal")?.classList.toggle("mt-[-100vh]");
     }
-  }, [zilPay]);
+  }, []);
 
   const disconnect = useCallback(async () => {
     if (zilPay) {
