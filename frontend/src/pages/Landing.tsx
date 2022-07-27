@@ -150,7 +150,7 @@ export default function Landing() {
       <section className="featured">
         <div className="container">
           <h2 className="uppercase text-center">Featured Profiles</h2>
-          <div className="flex flex-center flex-items-center">
+          <div className="grid">
             {profiles.map((user) => (
               <div className="card">
                 <div className="card-top flex flex-between flex-items-center">

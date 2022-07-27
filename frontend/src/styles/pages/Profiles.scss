@@ -1,8 +1,6 @@
 // profiles
 .profiles {
-    h1 {
-        font-weight: 5f00;
-    }
+   
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
