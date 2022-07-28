@@ -1,7 +1,7 @@
 import Link from '../components/Link';
 import { AdaptiveContentProps } from '../types/types';
 import { Icon } from '@iconify/react';
-import { ReactComponent as Zill } from '../assets/zill.svg';
+// import { ReactComponent as Zill } from '../assets/zill.svg';
 import { ReactComponent as ZillLogo } from '../assets/zilliqaLogo.svg';
 import { ReactComponent as WebStorage } from '../assets/web3.svg';
 import { ReactComponent as Gitcoin } from '../assets/gitcoin.svg';
@@ -154,7 +154,7 @@ export default function Landing() {
             {profiles.map((user) => (
               <div className="card">
                 <div className="card-top flex flex-between flex-items-center">
-                  <img className="radius-full center" src={user.profileImage} />
+                  <img className="radius-full center" alt="logo" src={user.profileImage} />
                 </div>
                 <div className="card-bottom flex flex-between flex-items-center ">
                   <div className="">

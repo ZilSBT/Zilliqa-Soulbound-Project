@@ -3,7 +3,7 @@ import { AiOutlineCopy } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import { useZilliqa } from "../providers/ZilliqaProvider";
 import { Profile } from "../types/types";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import { scillaJSONParams } from "@zilliqa-js/scilla-json-utils";
 import { useWallet } from "../providers/WalletProvider";
@@ -14,7 +14,7 @@ const ProfileDetail = () => {
   const { address } = useParams();
   const { zilliqa } = useZilliqa();
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [copied, setCopied] = useState<Boolean>();
+  // const [copied, setCopied] = useState<Boolean>();
   const [description, setDescription] = useState<string>();
   const { wallet, callContract } = useWallet();
   const [allowedToBurn, setallowedToBurn] = useState<Boolean>(false);
@@ -52,9 +52,9 @@ const ProfileDetail = () => {
 
   const copyToClipboard = useCallback((text: any) => {
     navigator.clipboard?.writeText(text);
-    setCopied(true);
+    // setCopied(true);
     setTimeout(() => {
-      setCopied(false);
+      // setCopied(false);
     }, 2000);
   }, []);
 
@@ -129,9 +129,16 @@ const ProfileDetail = () => {
                 <Icon icon="brandico:twitter-bird" width="25" />
                 <Icon icon="ci:share" width="22" />
               </div>
-              <a href="#" className="btn btn-primary">
+              <a href="/" className="btn btn-primary">
                 Earn Now
               </a>
+              {allowedToBurn ? (
+          <Button className="button-primary bg-red-600" onClick={() => Burn()}>
+            Burn Profile
+          </Button>
+        ) : (
+          ""
+        )}
             </div>
           </div>
         </div>

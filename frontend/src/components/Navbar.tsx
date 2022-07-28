@@ -3,16 +3,16 @@ import { BsWallet } from "react-icons/bs";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useWallet } from "../providers/WalletProvider";
 import Button from "./Button";
-import Switch from "./Switch";
+// import Switch from "./Switch";
 import { useMemo } from "react";
 import cn from "classnames";
-import { useColorMode } from "../providers/ColormodeProvider";
+// import { useColorMode } from "../providers/ColormodeProvider";
 import { ReactComponent as Logo } from "../assets/logo.svg";
 
 function Navbar() {
   // USE HOOK: "Functions that has states"
   const { wallet, connect, disconnect } = useWallet();
-  const { toggleTheme } = useColorMode();
+  // const { toggleTheme } = useColorMode();
 
   const shortenAddress = (address: String) => {
     const shortAddress = `${address.slice(0, 4)}...${address.slice(-3)}`;
@@ -43,7 +43,7 @@ function Navbar() {
               Educate
             </Link>
           </li>
-          {/* {wallet ? (
+          {wallet ? (
           <div className={cn('flex', 'items-center', 'gap-4')}>
             <h1 className={cn('lowercase', 'text-white text-lg')}>
               {walletAddress}
@@ -57,7 +57,7 @@ function Navbar() {
           <Button onClick={() => connect()}>
             Connect <BsWallet className="inline-block" />
           </Button>
-        )} */}
+        )}
         </ul>
       </div>
     </nav>
