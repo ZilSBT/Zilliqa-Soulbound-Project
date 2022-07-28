@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
-import { BsWallet } from 'react-icons/bs';
-import { AiOutlineLogout } from 'react-icons/ai';
-import { useWallet } from '../providers/WalletProvider';
-import Button from './Button';
-import Switch from './Switch';
-import { useMemo } from 'react';
-import cn from 'classnames';
-import { useColorMode } from '../providers/ColormodeProvider';
-import { ReactComponent as Logo } from '../assets/logo.svg';
+import { Link } from "react-router-dom";
+import { BsWallet } from "react-icons/bs";
+import { AiOutlineLogout } from "react-icons/ai";
+import { useWallet } from "../providers/WalletProvider";
+import Button from "./Button";
+import Switch from "./Switch";
+import { useMemo } from "react";
+import cn from "classnames";
+import { useColorMode } from "../providers/ColormodeProvider";
+import { ReactComponent as Logo } from "../assets/logo.svg";
 
 function Navbar() {
   // USE HOOK: "Functions that has states"

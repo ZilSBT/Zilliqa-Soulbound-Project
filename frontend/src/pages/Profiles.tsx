@@ -2,13 +2,10 @@
 // import { profile } from 'console';
 // import { request } from 'https';
 import { useCallback, useEffect, useState } from "react";
-// import Table from '../components/Table/Table';
-// import TableCell from '../components/Table/TableCell';
-// import TableHead from '../components/Table/TableHead';
 import { useZilliqa } from "../providers/ZilliqaProvider";
 import { Profile } from "../types/types";
 import { Icon } from "@iconify/react";
-import { ReactComponent as Zill } from '../assets/zill.svg';
+import { ReactComponent as Zill } from "../assets/zill.svg";
 export default function Profiles() {
   const { zilliqa } = useZilliqa();
   const [profiles, setProfiles] = useState<Profile[] | null>(null);
@@ -58,36 +55,46 @@ export default function Profiles() {
 
   return (
     <section className="profiles">
-      <div className="wrapper">
+      <div className="container">
         <h1 className="uppercase text-center">Profiles</h1>
         <div className="grid">
-        {profiles.map(({ address, profile_uri, data_uri, balance, data }) => (
-        <div onClick={()=> window.open(`profiles/${address}`)} className="card">
-        <div className="card-top">
-          <img className="radius-full center" src={profile_uri} alt="" />
-        </div>
-        <div className="card-bottom card-container">
-          <div className="flex flex-between flex-items-center">
-            <div>
-              <h3>@{data?.name}</h3>
-              <p>
-                <Icon icon="entypo:wallet" width='25' className="inline" />
-                {String(address).substring(0, 6) +
-                  "..." +
-                  String(address).substring(38)}
-              </p>
-              <p>
-                <Zill/>
-                {balance}
-              </p>
+          {profiles.map(({ address, profile_uri, data_uri, balance, data }) => (
+            <div
+              onClick={() => window.open(`profiles/${address}`)}
+              className="card"
+            >
+              <div className="card-top">
+                <img className="radius-full center" src={profile_uri} alt="" />
+              </div>
+              <div className="card-bottom card-container">
+                <div className="flex flex-between flex-items-center">
+                  <div>
+                    <h3>@{data?.name}</h3>
+                    <p>
+                      <Icon
+                        icon="entypo:wallet"
+                        width="25"
+                        className="inline"
+                      />
+                      {String(address).substring(0, 6) +
+                        "..." +
+                        String(address).substring(38)}
+                    </p>
+                    <p>
+                      <Zill />
+                      {balance}
+                    </p>
+                  </div>
+                  <a
+                    className="text-white"
+                    href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20profile%20on%20Zilsbt%3A%0A%0Ahttp%3A//localhost%3A3000/profiles/${address}`}
+                  >
+                    <Icon icon="ci:share" width="30" />
+                  </a>
+                </div>
+              </div>
             </div>
-            <a className="text-white" href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20profile%20on%20Zilsbt%3A%0A%0Ahttp%3A//localhost%3A3000/profiles/${address}`}>
-            <Icon icon="ci:share" width="30" />
-            </a>
-          </div>
-        </div>
-      </div>
-      ))}
+          ))}
         </div>
       </div>
     </section>

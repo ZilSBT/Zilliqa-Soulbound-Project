@@ -15,10 +15,21 @@
   align-items: center;
   align-content: center;
 }
+.flex-self-center {
+  align-self: center;
+}
+.flex-self-end {
+  align-self: flex-end;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+
 .flex-items-start {
   align-items: flex-start;
   align-content: flex-start;
 }
+// self
 
 // grid
 .grid {
