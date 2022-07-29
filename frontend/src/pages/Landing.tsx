@@ -104,9 +104,9 @@ export default function Landing() {
                             y2="17.8244"
                             gradientUnits="userSpaceOnUse"
                           >
-                            <stop stop-color="#05707E" />
-                            <stop offset="0.52" stop-color="#2B9297" />
-                            <stop offset="1" stop-color="#4DBBBA" />
+                            <stop stopColor="#05707E" />
+                            <stop offset="0.52" stopColor="#2B9297" />
+                            <stop offset="1" stopColor="#4DBBBA" />
                           </linearGradient>
                           <linearGradient
                             id="paint1_linear_0_1"
@@ -116,9 +116,9 @@ export default function Landing() {
                             y2="23.5946"
                             gradientUnits="userSpaceOnUse"
                           >
-                            <stop stop-color="#05707E" />
-                            <stop offset="0.52" stop-color="#2B9297" />
-                            <stop offset="1" stop-color="#4DBBBA" />
+                            <stop stopColor="#05707E" />
+                            <stop offset="0.52" stopColor="#2B9297" />
+                            <stop offset="1" stopColor="#4DBBBA" />
                           </linearGradient>
                           <linearGradient
                             id="paint2_linear_0_1"
@@ -128,9 +128,9 @@ export default function Landing() {
                             y2="82.8535"
                             gradientUnits="userSpaceOnUse"
                           >
-                            <stop stop-color="#05707E" />
-                            <stop offset="0.52" stop-color="#2B9297" />
-                            <stop offset="1" stop-color="#4DBBBA" />
+                            <stop stopColor="#05707E" />
+                            <stop offset="0.52" stopColor="#2B9297" />
+                            <stop offset="1" stopColor="#4DBBBA" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -149,7 +149,7 @@ export default function Landing() {
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <g clip-path="url(#clip0_58_309)">
+                          <g clipPath="url(#clip0_58_309)">
                             <path
                               d="M16.5002 3.74998C16.5 2.87013 16.8093 2.01826 17.3739 1.3434C17.9384 0.668542 18.7223 0.213678 19.5883 0.0583884C20.4543 -0.0969011 21.3474 0.0572728 22.1112 0.493936C22.8751 0.9306 23.4611 1.62195 23.7667 2.44702C24.0723 3.27209 24.078 4.17835 23.7829 5.00724C23.4879 5.83613 22.9107 6.53487 22.1525 6.9812C21.3942 7.42753 20.5032 7.59304 19.6352 7.44876C18.7673 7.30448 17.9777 6.85961 17.4047 6.19198L7.32765 10.872C7.55932 11.6061 7.55932 12.3938 7.32765 13.128L17.4047 17.808C18.0104 17.1035 18.8561 16.6489 19.7779 16.5325C20.6997 16.416 21.632 16.6458 22.3939 17.1775C23.1559 17.7092 23.6934 18.5048 23.9022 19.4102C24.1109 20.3155 23.9762 21.2662 23.524 22.0778C23.0719 22.8895 22.3345 23.5044 21.4548 23.8034C20.5751 24.1024 19.6157 24.0642 18.7626 23.6961C17.9095 23.328 17.2233 22.6564 16.8372 21.8113C16.4511 20.9662 16.3925 20.0079 16.6727 19.122L6.59565 14.442C6.09681 15.0233 5.43188 15.438 4.69032 15.6301C3.94876 15.8222 3.16615 15.7827 2.44776 15.5167C1.72937 15.2507 1.10967 14.7711 0.672015 14.1424C0.234362 13.5137 -0.000244141 12.766 -0.000244141 12C-0.000244141 11.2339 0.234362 10.4863 0.672015 9.85755C1.10967 9.22884 1.72937 8.74923 2.44776 8.48326C3.16615 8.21729 3.94876 8.17772 4.69032 8.36985C5.43188 8.56199 6.09681 8.97663 6.59565 9.55798L16.6727 4.87798C16.5579 4.51298 16.4998 4.13258 16.5002 3.74998Z"
                               fill="#E6E6E6"
@@ -186,14 +186,14 @@ export default function Landing() {
                 fill="#E6E6E6"
               />
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M77.3652 49.31C80.0841 53.1125 81.56 57.7301 81.5213 62.3863C81.5213 66.9649 80.0454 71.5435 77.3652 75.2684L83.0359 79.5752C86.6479 74.6085 88.6288 68.5557 88.6288 62.4249C88.6679 55.9451 86.5314 49.5818 82.6087 44.46L79.3567 47.385L77.3652 49.31Z"
                 fill="#15EBB7"
               />
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M88.0851 83.3901L69.0148 68.9172C70.3742 67.1321 71.1508 64.9595 71.2673 62.7088C71.3451 60.4585 70.7627 58.2468 69.5585 56.3455L78.6859 48.1196L88.2407 39.1953C88.8621 38.6131 88.9008 37.6043 88.2794 36.9835L86.959 35.6642C80.1619 28.7964 70.9957 24.7998 61.3632 24.4894L61.4023 19.2512C61.441 18.902 61.4023 18.5528 61.3245 18.2036C61.208 17.8544 61.0524 17.5439 60.8195 17.2723C60.5865 17.0007 60.3145 16.8067 59.965 16.6515C59.6543 16.4963 59.3049 16.4187 58.955 16.4187C58.6056 16.4187 58.2562 16.4963 57.9454 16.6515C57.6347 16.8067 57.324 17.0007 57.091 17.2723C56.8577 17.5439 56.6634 17.8544 56.586 18.1648C56.4695 18.514 56.4304 18.8632 56.5082 19.2124L56.4695 24.6058C54.1779 24.8386 51.8862 25.2654 49.6724 25.9251L49.7111 19.2124C49.7502 18.8632 49.7111 18.514 49.6337 18.1648C49.5172 17.8156 49.3616 17.5051 49.1287 17.2335C48.8957 16.9619 48.6237 16.7679 48.2743 16.6127C47.9635 16.4575 47.6137 16.3799 47.2642 16.3799C46.9148 16.3799 46.565 16.4575 46.2546 16.6127C45.9439 16.7679 45.6332 16.9619 45.3998 17.2335C45.1669 17.5051 44.9726 17.8156 44.8952 18.126C44.7783 18.4752 44.7397 18.8244 44.8174 19.1736L44.701 27.7487C36.8552 31.2408 30.4077 37.3327 26.4849 44.9766C22.562 52.6206 21.3191 61.3898 23.0281 69.8095C24.7371 78.2296 29.2814 85.8346 35.8842 91.3445C42.4871 96.854 50.7989 99.9584 59.3823 100.114L87.1529 100.23C88.0077 100.23 88.7066 99.5314 88.7066 98.6777V84.6704C88.7066 84.1662 88.4736 83.7005 88.0851 83.3901ZM59.9263 93.362C53.0905 93.3234 46.4485 91.0341 41.0499 86.8821C35.6511 82.6916 31.7671 76.8326 30.0193 70.2362C28.2715 63.6401 28.7765 56.617 31.3787 50.3313C34.0198 44.0453 38.6418 38.7683 44.5845 35.3538L44.5454 45.5585C44.5067 45.908 44.5454 46.257 44.6232 46.6061C44.7397 46.9555 44.8952 47.2659 45.1282 47.5374C45.3611 47.8092 45.6332 48.003 45.9826 48.1583C46.2933 48.3135 46.6428 48.3911 46.9926 48.3911C47.342 48.3911 47.6915 48.3135 48.0022 48.1583C48.3129 48.003 48.6237 47.8092 48.8566 47.5374C49.0896 47.2659 49.2839 46.9555 49.3616 46.6451C49.4781 46.296 49.5172 45.9466 49.4394 45.5975L49.4781 33.0645C52.8962 31.8229 56.5082 31.2408 60.1593 31.2408C66.8787 31.2408 73.4038 33.4525 78.7246 37.4879C79.1132 37.7983 79.1519 38.3415 78.8024 38.6907L64.2763 51.9997C62.9556 51.4565 61.5187 51.146 60.0815 51.146C58.4891 51.146 56.8967 51.4565 55.4208 52.116C53.9449 52.7758 52.6629 53.7458 51.6142 54.9485C50.5659 56.1513 49.7889 57.5869 49.3229 59.1005C48.8566 60.6523 48.7402 62.2431 48.9731 63.8339C49.2065 65.4251 49.7502 66.9383 50.6046 68.2963C51.459 69.6543 52.6242 70.7794 53.9449 71.6721C55.3044 72.5254 56.819 73.1077 58.4114 73.3405C60.0037 73.5734 61.6352 73.4568 63.1498 72.9911L81.7156 87.0763C81.9098 87.2316 82.0263 87.464 82.0263 87.6968L81.9872 92.6635C81.9872 93.0905 81.6378 93.4396 81.2106 93.4396L59.9263 93.362ZM64.4706 62.3207C64.4706 63.1744 64.1985 64.0281 63.7326 64.7652C63.2276 65.5027 62.5674 66.0456 61.7517 66.395C60.936 66.7441 60.0428 66.8217 59.2271 66.6279C58.4114 66.4337 57.5956 66.0456 56.9741 65.4251C56.3531 64.8042 55.9254 64.0281 55.7703 63.1744C55.6151 62.3207 55.6925 61.4284 56.0423 60.6523C56.3918 59.8376 56.9354 59.1781 57.6734 58.6734C58.4114 58.2078 59.2658 57.9363 60.1202 57.9363C61.2854 57.9363 62.4119 58.402 63.2276 59.2557C64.0043 60.0314 64.4706 61.118 64.4706 62.3207Z"
                 fill="#E6E6E6"
               />
@@ -260,9 +260,9 @@ export default function Landing() {
                   y2="50.1282"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint1_linear_37_237"
@@ -272,9 +272,9 @@ export default function Landing() {
                   y2="49.6283"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint2_linear_37_237"
@@ -284,9 +284,9 @@ export default function Landing() {
                   y2="49.2951"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint3_linear_37_237"
@@ -296,9 +296,9 @@ export default function Landing() {
                   y2="48.8144"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint4_linear_37_237"
@@ -308,9 +308,9 @@ export default function Landing() {
                   y2="48.3339"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint5_linear_37_237"
@@ -320,9 +320,9 @@ export default function Landing() {
                   y2="47.6675"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint6_linear_37_237"
@@ -332,9 +332,9 @@ export default function Landing() {
                   y2="45.7707"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint7_linear_37_237"
@@ -344,9 +344,9 @@ export default function Landing() {
                   y2="17.8244"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint8_linear_37_237"
@@ -356,9 +356,9 @@ export default function Landing() {
                   y2="23.5946"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint9_linear_37_237"
@@ -368,9 +368,9 @@ export default function Landing() {
                   y2="30.9202"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
                 <linearGradient
                   id="paint10_linear_37_237"
@@ -380,9 +380,9 @@ export default function Landing() {
                   y2="82.8535"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#05707E" />
-                  <stop offset="0.52" stop-color="#2B9297" />
-                  <stop offset="1" stop-color="#4DBBBA" />
+                  <stop stopColor="#05707E" />
+                  <stop offset="0.52" stopColor="#2B9297" />
+                  <stop offset="1" stopColor="#4DBBBA" />
                 </linearGradient>
               </defs>
             </svg>
@@ -395,7 +395,7 @@ export default function Landing() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_5_8)">
+              <g clipPath="url(#clip0_5_8)">
                 <path
                   d="M13.6 27.18C10.9122 27.178 8.28528 26.379 6.05151 24.8841C3.81775 23.3892 2.07745 21.2654 1.05068 18.7814C0.0239117 16.2974 -0.243205 13.5647 0.283108 10.9289C0.809421 8.29311 2.10552 5.87255 4.00752 3.97336C5.90951 2.07416 8.33197 0.78162 10.9686 0.259187C13.6051 -0.263246 16.3374 0.00789142 18.8199 1.03831C21.3024 2.06873 23.4236 3.81216 24.9152 6.04812C26.4069 8.28408 27.202 10.9122 27.2 13.6C27.1921 17.2027 25.756 20.6552 23.2067 23.2008C20.6573 25.7464 17.2027 27.1774 13.6 27.18V27.18ZM13.6 2C11.3086 2.00198 9.06916 2.68315 7.16473 3.95744C5.2603 5.23172 3.77633 7.04193 2.90035 9.15932C2.02437 11.2767 1.79569 13.6062 2.24321 15.8535C2.69073 18.1009 3.79437 20.1651 5.41466 21.7854C7.03495 23.4057 9.09917 24.5093 11.3465 24.9568C13.5938 25.4043 15.9233 25.1757 18.0407 24.2997C20.1581 23.4237 21.9683 21.9397 23.2426 20.0353C24.5169 18.1309 25.198 15.8914 25.2 13.6C25.1947 10.5251 23.9709 7.57768 21.7966 5.4034C19.6223 3.22913 16.6749 2.00529 13.6 2V2Z"
                   fill="#E6E6E6"
@@ -430,7 +430,7 @@ export default function Landing() {
               // subtitle={items.subtitle}
               // content={items.content}
 
-              <div className="why-us">
+              <div className="why-us" key={items.title}>
                 <div className="card-why-us">
                   <h5>{items.subtitle}</h5>
                   <h4>{items.title}</h4>
@@ -509,9 +509,9 @@ export default function Landing() {
                           y2="17.8244"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint1_linear_0_1"
@@ -521,9 +521,9 @@ export default function Landing() {
                           y2="23.5946"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint2_linear_0_1"
@@ -533,9 +533,9 @@ export default function Landing() {
                           y2="82.8535"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                       </defs>
                     </svg>
@@ -552,7 +552,7 @@ export default function Landing() {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <g clip-path="url(#clip0_58_309)">
+                        <g clipPath="url(#clip0_58_309)">
                           <path
                             d="M16.5002 3.74998C16.5 2.87013 16.8093 2.01826 17.3739 1.3434C17.9384 0.668542 18.7223 0.213678 19.5883 0.0583884C20.4543 -0.0969011 21.3474 0.0572728 22.1112 0.493936C22.8751 0.9306 23.4611 1.62195 23.7667 2.44702C24.0723 3.27209 24.078 4.17835 23.7829 5.00724C23.4879 5.83613 22.9107 6.53487 22.1525 6.9812C21.3942 7.42753 20.5032 7.59304 19.6352 7.44876C18.7673 7.30448 17.9777 6.85961 17.4047 6.19198L7.32765 10.872C7.55932 11.6061 7.55932 12.3938 7.32765 13.128L17.4047 17.808C18.0104 17.1035 18.8561 16.6489 19.7779 16.5325C20.6997 16.416 21.632 16.6458 22.3939 17.1775C23.1559 17.7092 23.6934 18.5048 23.9022 19.4102C24.1109 20.3155 23.9762 21.2662 23.524 22.0778C23.0719 22.8895 22.3345 23.5044 21.4548 23.8034C20.5751 24.1024 19.6157 24.0642 18.7626 23.6961C17.9095 23.328 17.2233 22.6564 16.8372 21.8113C16.4511 20.9662 16.3925 20.0079 16.6727 19.122L6.59565 14.442C6.09681 15.0233 5.43188 15.438 4.69032 15.6301C3.94876 15.8222 3.16615 15.7827 2.44776 15.5167C1.72937 15.2507 1.10967 14.7711 0.672015 14.1424C0.234362 13.5137 -0.000244141 12.766 -0.000244141 12C-0.000244141 11.2339 0.234362 10.4863 0.672015 9.85755C1.10967 9.22884 1.72937 8.74923 2.44776 8.48326C3.16615 8.21729 3.94876 8.17772 4.69032 8.36985C5.43188 8.56199 6.09681 8.97663 6.59565 9.55798L16.6727 4.87798C16.5579 4.51298 16.4998 4.13258 16.5002 3.74998Z"
                             fill="#E6E6E6"
@@ -627,9 +627,9 @@ export default function Landing() {
                           y2="17.8244"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint1_linear_0_1"
@@ -639,9 +639,9 @@ export default function Landing() {
                           y2="23.5946"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint2_linear_0_1"
@@ -651,9 +651,9 @@ export default function Landing() {
                           y2="82.8535"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                       </defs>
                     </svg>
@@ -670,7 +670,7 @@ export default function Landing() {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <g clip-path="url(#clip0_58_309)">
+                        <g clipPath="url(#clip0_58_309)">
                           <path
                             d="M16.5002 3.74998C16.5 2.87013 16.8093 2.01826 17.3739 1.3434C17.9384 0.668542 18.7223 0.213678 19.5883 0.0583884C20.4543 -0.0969011 21.3474 0.0572728 22.1112 0.493936C22.8751 0.9306 23.4611 1.62195 23.7667 2.44702C24.0723 3.27209 24.078 4.17835 23.7829 5.00724C23.4879 5.83613 22.9107 6.53487 22.1525 6.9812C21.3942 7.42753 20.5032 7.59304 19.6352 7.44876C18.7673 7.30448 17.9777 6.85961 17.4047 6.19198L7.32765 10.872C7.55932 11.6061 7.55932 12.3938 7.32765 13.128L17.4047 17.808C18.0104 17.1035 18.8561 16.6489 19.7779 16.5325C20.6997 16.416 21.632 16.6458 22.3939 17.1775C23.1559 17.7092 23.6934 18.5048 23.9022 19.4102C24.1109 20.3155 23.9762 21.2662 23.524 22.0778C23.0719 22.8895 22.3345 23.5044 21.4548 23.8034C20.5751 24.1024 19.6157 24.0642 18.7626 23.6961C17.9095 23.328 17.2233 22.6564 16.8372 21.8113C16.4511 20.9662 16.3925 20.0079 16.6727 19.122L6.59565 14.442C6.09681 15.0233 5.43188 15.438 4.69032 15.6301C3.94876 15.8222 3.16615 15.7827 2.44776 15.5167C1.72937 15.2507 1.10967 14.7711 0.672015 14.1424C0.234362 13.5137 -0.000244141 12.766 -0.000244141 12C-0.000244141 11.2339 0.234362 10.4863 0.672015 9.85755C1.10967 9.22884 1.72937 8.74923 2.44776 8.48326C3.16615 8.21729 3.94876 8.17772 4.69032 8.36985C5.43188 8.56199 6.09681 8.97663 6.59565 9.55798L16.6727 4.87798C16.5579 4.51298 16.4998 4.13258 16.5002 3.74998Z"
                             fill="#E6E6E6"
@@ -745,9 +745,9 @@ export default function Landing() {
                           y2="17.8244"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint1_linear_0_1"
@@ -757,9 +757,9 @@ export default function Landing() {
                           y2="23.5946"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint2_linear_0_1"
@@ -769,9 +769,9 @@ export default function Landing() {
                           y2="82.8535"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                       </defs>
                     </svg>
@@ -788,7 +788,7 @@ export default function Landing() {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <g clip-path="url(#clip0_58_309)">
+                        <g clipPath="url(#clip0_58_309)">
                           <path
                             d="M16.5002 3.74998C16.5 2.87013 16.8093 2.01826 17.3739 1.3434C17.9384 0.668542 18.7223 0.213678 19.5883 0.0583884C20.4543 -0.0969011 21.3474 0.0572728 22.1112 0.493936C22.8751 0.9306 23.4611 1.62195 23.7667 2.44702C24.0723 3.27209 24.078 4.17835 23.7829 5.00724C23.4879 5.83613 22.9107 6.53487 22.1525 6.9812C21.3942 7.42753 20.5032 7.59304 19.6352 7.44876C18.7673 7.30448 17.9777 6.85961 17.4047 6.19198L7.32765 10.872C7.55932 11.6061 7.55932 12.3938 7.32765 13.128L17.4047 17.808C18.0104 17.1035 18.8561 16.6489 19.7779 16.5325C20.6997 16.416 21.632 16.6458 22.3939 17.1775C23.1559 17.7092 23.6934 18.5048 23.9022 19.4102C24.1109 20.3155 23.9762 21.2662 23.524 22.0778C23.0719 22.8895 22.3345 23.5044 21.4548 23.8034C20.5751 24.1024 19.6157 24.0642 18.7626 23.6961C17.9095 23.328 17.2233 22.6564 16.8372 21.8113C16.4511 20.9662 16.3925 20.0079 16.6727 19.122L6.59565 14.442C6.09681 15.0233 5.43188 15.438 4.69032 15.6301C3.94876 15.8222 3.16615 15.7827 2.44776 15.5167C1.72937 15.2507 1.10967 14.7711 0.672015 14.1424C0.234362 13.5137 -0.000244141 12.766 -0.000244141 12C-0.000244141 11.2339 0.234362 10.4863 0.672015 9.85755C1.10967 9.22884 1.72937 8.74923 2.44776 8.48326C3.16615 8.21729 3.94876 8.17772 4.69032 8.36985C5.43188 8.56199 6.09681 8.97663 6.59565 9.55798L16.6727 4.87798C16.5579 4.51298 16.4998 4.13258 16.5002 3.74998Z"
                             fill="#E6E6E6"
@@ -863,9 +863,9 @@ export default function Landing() {
                           y2="17.8244"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint1_linear_0_1"
@@ -875,9 +875,9 @@ export default function Landing() {
                           y2="23.5946"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                         <linearGradient
                           id="paint2_linear_0_1"
@@ -887,9 +887,9 @@ export default function Landing() {
                           y2="82.8535"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#05707E" />
-                          <stop offset="0.52" stop-color="#2B9297" />
-                          <stop offset="1" stop-color="#4DBBBA" />
+                          <stop stopColor="#05707E" />
+                          <stop offset="0.52" stopColor="#2B9297" />
+                          <stop offset="1" stopColor="#4DBBBA" />
                         </linearGradient>
                       </defs>
                     </svg>
@@ -906,7 +906,7 @@ export default function Landing() {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <g clip-path="url(#clip0_58_309)">
+                        <g clipPath="url(#clip0_58_309)">
                           <path
                             d="M16.5002 3.74998C16.5 2.87013 16.8093 2.01826 17.3739 1.3434C17.9384 0.668542 18.7223 0.213678 19.5883 0.0583884C20.4543 -0.0969011 21.3474 0.0572728 22.1112 0.493936C22.8751 0.9306 23.4611 1.62195 23.7667 2.44702C24.0723 3.27209 24.078 4.17835 23.7829 5.00724C23.4879 5.83613 22.9107 6.53487 22.1525 6.9812C21.3942 7.42753 20.5032 7.59304 19.6352 7.44876C18.7673 7.30448 17.9777 6.85961 17.4047 6.19198L7.32765 10.872C7.55932 11.6061 7.55932 12.3938 7.32765 13.128L17.4047 17.808C18.0104 17.1035 18.8561 16.6489 19.7779 16.5325C20.6997 16.416 21.632 16.6458 22.3939 17.1775C23.1559 17.7092 23.6934 18.5048 23.9022 19.4102C24.1109 20.3155 23.9762 21.2662 23.524 22.0778C23.0719 22.8895 22.3345 23.5044 21.4548 23.8034C20.5751 24.1024 19.6157 24.0642 18.7626 23.6961C17.9095 23.328 17.2233 22.6564 16.8372 21.8113C16.4511 20.9662 16.3925 20.0079 16.6727 19.122L6.59565 14.442C6.09681 15.0233 5.43188 15.438 4.69032 15.6301C3.94876 15.8222 3.16615 15.7827 2.44776 15.5167C1.72937 15.2507 1.10967 14.7711 0.672015 14.1424C0.234362 13.5137 -0.000244141 12.766 -0.000244141 12C-0.000244141 11.2339 0.234362 10.4863 0.672015 9.85755C1.10967 9.22884 1.72937 8.74923 2.44776 8.48326C3.16615 8.21729 3.94876 8.17772 4.69032 8.36985C5.43188 8.56199 6.09681 8.97663 6.59565 9.55798L16.6727 4.87798C16.5579 4.51298 16.4998 4.13258 16.5002 3.74998Z"
                             fill="#E6E6E6"

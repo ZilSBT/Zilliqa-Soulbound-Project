@@ -7,17 +7,18 @@ import {
   useState,
   ReactNode,
   useCallback,
-} from 'react';
-import { Web3Storage } from 'web3.storage';
-import { v4 as uuidv4 } from 'uuid';
+} from "react";
+import { Web3Storage } from "web3.storage";
+import { v4 as uuidv4 } from "uuid";
 
 interface StorageProviderContextValue {
   web3storage: Web3Storage;
   storeFiles: (file: any) => Promise<String | undefined>;
   storeJson: (file: any) => Promise<String | undefined>;
 }
-const WEB3STORAGE_API_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDFCYjM0NzY5NDkxOTQ3M0ZGNTI5MzJENkY5OTM5MDk4ZTYzODY4OTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTYzMDAwODgwODgsIm5hbWUiOiJUaGVfT25lIn0.pxI5FbXru-zycL8YH-BHEE_zBqyUi9UKVM2JGGL6pYk';
+// let CONTRACT_ADDRESS: any = process.env.REACT_APP_CONTRACT_ADDRESS;
+
+const WEB3STORAGE_API_KEY = process.env.REACT_APP_WEB3_STORAGE_API_KEY;
 
 const StorageContext = createContext<StorageProviderContextValue>(null as any);
 
@@ -27,11 +28,11 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!WEB3STORAGE_API_KEY) {
-      throw new Error('WEB3STorage API keys not provided!');
+      throw new Error("WEB3STorage API keys not provided!");
     }
     const web3storageclient = new Web3Storage({
       token: WEB3STORAGE_API_KEY!,
-      endpoint: new URL('https://api.web3.storage'),
+      endpoint: new URL("https://api.web3.storage"),
     });
     setweb3storageClient(web3storageclient);
   }, []);
@@ -39,7 +40,7 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
   const storeFiles = useCallback(
     async (file: any) => {
       if (web3storageClient) {
-        const ext = file.name.split('.').pop();
+        const ext = file.name.split(".").pop();
         const fileName = `${uuidv4()}.${ext}`;
         const newFile = new File([file], fileName, { type: file.type });
         const cid = await web3storageClient.put([newFile], {
@@ -49,13 +50,13 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
         return imageURI;
       }
     },
-    [web3storageClient],
+    [web3storageClient]
   );
 
   const storeJson = useCallback(
     async (file: any) => {
       if (web3storageClient) {
-        const ext = 'json';
+        const ext = "json";
         const fileName = `${uuidv4()}.${ext}`;
         const newFile = new File([file], fileName, { type: file.type });
         const cid = await web3storageClient.put([newFile], {
@@ -65,7 +66,7 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
         return imageURI;
       }
     },
-    [web3storageClient],
+    [web3storageClient]
   );
 
   const value = useMemo(() => {
