@@ -63,7 +63,7 @@ const WalletModal = () => {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div>hel</div>
       )}
     </>
   );

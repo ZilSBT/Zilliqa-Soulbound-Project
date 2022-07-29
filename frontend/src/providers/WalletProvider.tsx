@@ -9,8 +9,6 @@ import { Contracts } from "@zilliqa-js/contract";
 import { CallParams, Value } from "../types/zilliqa";
 import { TX_PARAMS } from "./ZilliqaProvider";
 
-import toast from "react-hot-toast";
-import { decodeZilPayError } from "../functions/decodeMessage";
 declare global {
   interface Window {
     // TODO: Complete type declaration
@@ -45,23 +43,17 @@ function WalletProvider({ children }: Props) {
         "0xb019d93b6ad4b8e7339a1042ede50341a77cca0f"
       );
 
-      try {
-        const callTx = await contract.call(transition, args, {
-          ...TX_PARAMS,
-          ...params,
-        });
-        // transitionMessageAlert(zilPay, callTx.ID, "Creating user");
-        return callTx;
-      } catch (error: any) {
-        toast.error(decodeZilPayError(error));
-        // console.log(error);
-      }
+      const callTx = contract.call(transition, args, {
+        ...TX_PARAMS,
+        ...params,
+      });
+
+      return callTx;
     },
     [zilPay]
   );
 
   const connect = useCallback(async () => {
-    const zilPay = window.zilPay;
     if (zilPay) {
       await zilPay.wallet.connect();
       setWallet(zilPay.wallet);
@@ -72,7 +64,7 @@ function WalletProvider({ children }: Props) {
       document.getElementById("walletModal")?.classList.toggle("hidden");
       document.getElementById("walletModal")?.classList.toggle("mt-[-100vh]");
     }
-  }, []);
+  }, [zilPay]);
 
   const disconnect = useCallback(async () => {
     if (zilPay) {
