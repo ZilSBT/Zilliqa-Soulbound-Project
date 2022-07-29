@@ -12,7 +12,7 @@ import WalletProvider from './providers/WalletProvider';
 import ZilliqaProvider from './providers/ZilliqaProvider';
 import PinataProvider from './providers/PinataProvider';
 
-import WalletModal from './components/WalletModal';
+// import WalletModal from './components/WalletModal';
 
 import ColorModeProvider from './providers/ColormodeProvider';
 import Web3StorageProvider from './providers/Web3StorageProvider';
@@ -37,7 +37,7 @@ const App = () => {
                   <Route path="/educational" element={<Educational />} />
                 </Route>
               </Routes>
-              <WalletModal></WalletModal>
+              {/* <WalletModal></WalletModal> */}
             </ColorModeProvider>
           </PinataProvider>
         </Web3StorageProvider>

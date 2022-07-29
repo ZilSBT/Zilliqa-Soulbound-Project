@@ -16,9 +16,7 @@ interface StorageProviderContextValue {
   storeFiles: (file: any) => Promise<String | undefined>;
   storeJson: (file: any) => Promise<String | undefined>;
 }
-const WEB3STORAGE_API_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDFCYjM0NzY5NDkxOTQ3M0ZGNTI5MzJENkY5OTM5MDk4ZTYzODY4OTkiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTYzMDAwODgwODgsIm5hbWUiOiJUaGVfT25lIn0.pxI5FbXru-zycL8YH-BHEE_zBqyUi9UKVM2JGGL6pYk';
-
+const WEB3STORAGE_API_KEY = process.env.REACT_APP_WEB3_STORAGE_API_KEY;
 const StorageContext = createContext<StorageProviderContextValue>(null as any);
 
 const StorageProvider = ({ children }: { children: ReactNode }) => {

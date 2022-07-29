@@ -176,6 +176,7 @@ const DropArea = () => {
               errors={errors}
               disabled={wallet}
             />
+            <DropArea />
 
             <FormField
               id="name"
