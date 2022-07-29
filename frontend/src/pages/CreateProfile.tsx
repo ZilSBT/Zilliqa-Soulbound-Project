@@ -17,7 +17,6 @@ const CreateProfile = () => {
     <div className="m-6 mb-6">
       {content.map((items) => (
         <AdaptiveContent
-          key={items.title}
           title={items.title}
           subtitle={items.subtitle}
           content={items.content}

@@ -10,5 +10,5 @@ export type AdaptiveContentProps = {
   title: string;
   subtitle: string;
   content: string;
-  subcontent: string;
+  subcontent:string; 
 };
