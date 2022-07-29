@@ -41,10 +41,14 @@ const ProfileDetail = () => {
       } catch (err) {
         console.log(err);
       }
-      const userData = await fetch(states.token_uris[address][1]).then((res) =>
-        res.json()
-      );
-      setDescription(userData.id);
+      try {
+        const userData = await fetch(states.token_uris[address][1]).then(
+          (res) => res.json()
+        );
+        setDescription(userData.id);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [address, zilliqa.contracts, zilliqa.blockchain]);
 
@@ -152,9 +156,9 @@ const ProfileDetail = () => {
                     y2="17.8244"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#05707E" />
-                    <stop offset="0.52" stop-color="#2B9297" />
-                    <stop offset="1" stop-color="#4DBBBA" />
+                    <stop stopColor="#05707E" />
+                    <stop offset="0.52" stopColor="#2B9297" />
+                    <stop offset="1" stopColor="#4DBBBA" />
                   </linearGradient>
                   <linearGradient
                     id="paint1_linear_0_1"
@@ -164,9 +168,9 @@ const ProfileDetail = () => {
                     y2="23.5946"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#05707E" />
-                    <stop offset="0.52" stop-color="#2B9297" />
-                    <stop offset="1" stop-color="#4DBBBA" />
+                    <stop stopColor="#05707E" />
+                    <stop offset="0.52" stopColor="#2B9297" />
+                    <stop offset="1" stopColor="#4DBBBA" />
                   </linearGradient>
                   <linearGradient
                     id="paint2_linear_0_1"
@@ -176,9 +180,9 @@ const ProfileDetail = () => {
                     y2="82.8535"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#05707E" />
-                    <stop offset="0.52" stop-color="#2B9297" />
-                    <stop offset="1" stop-color="#4DBBBA" />
+                    <stop stopColor="#05707E" />
+                    <stop offset="0.52" stopColor="#2B9297" />
+                    <stop offset="1" stopColor="#4DBBBA" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -237,7 +241,7 @@ const ProfileDetail = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_58_309)">
+                <g clipPath="url(#clip0_58_309)">
                   <path
                     d="M16.5002 3.74998C16.5 2.87013 16.8093 2.01826 17.3739 1.3434C17.9384 0.668542 18.7223 0.213678 19.5883 0.0583884C20.4543 -0.0969011 21.3474 0.0572728 22.1112 0.493936C22.8751 0.9306 23.4611 1.62195 23.7667 2.44702C24.0723 3.27209 24.078 4.17835 23.7829 5.00724C23.4879 5.83613 22.9107 6.53487 22.1525 6.9812C21.3942 7.42753 20.5032 7.59304 19.6352 7.44876C18.7673 7.30448 17.9777 6.85961 17.4047 6.19198L7.32765 10.872C7.55932 11.6061 7.55932 12.3938 7.32765 13.128L17.4047 17.808C18.0104 17.1035 18.8561 16.6489 19.7779 16.5325C20.6997 16.416 21.632 16.6458 22.3939 17.1775C23.1559 17.7092 23.6934 18.5048 23.9022 19.4102C24.1109 20.3155 23.9762 21.2662 23.524 22.0778C23.0719 22.8895 22.3345 23.5044 21.4548 23.8034C20.5751 24.1024 19.6157 24.0642 18.7626 23.6961C17.9095 23.328 17.2233 22.6564 16.8372 21.8113C16.4511 20.9662 16.3925 20.0079 16.6727 19.122L6.59565 14.442C6.09681 15.0233 5.43188 15.438 4.69032 15.6301C3.94876 15.8222 3.16615 15.7827 2.44776 15.5167C1.72937 15.2507 1.10967 14.7711 0.672015 14.1424C0.234362 13.5137 -0.000244141 12.766 -0.000244141 12C-0.000244141 11.2339 0.234362 10.4863 0.672015 9.85755C1.10967 9.22884 1.72937 8.74923 2.44776 8.48326C3.16615 8.21729 3.94876 8.17772 4.69032 8.36985C5.43188 8.56199 6.09681 8.97663 6.59565 9.55798L16.6727 4.87798C16.5579 4.51298 16.4998 4.13258 16.5002 3.74998Z"
                     fill="#E6E6E6"
@@ -254,10 +258,10 @@ const ProfileDetail = () => {
         </div>
 
         {/* profile-description */}
-        <p className="profile-description">
+        <div className="profile-description">
           <div> Description :</div>
           {description ? description : "N/A"}
-        </p>
+        </div>
 
         <Link to="/educational" className="cta-secondary my-4">
           Earn Achievement

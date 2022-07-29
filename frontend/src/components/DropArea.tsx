@@ -11,7 +11,18 @@ import Button from "../components/Button";
 import Loader from "../assets/loader.gif";
 import cn from "classnames";
 import Link from "../components/Link";
+import { Contracts } from "@zilliqa-js/contract";
+import transitionMessageAlert from "../functions/transitionMessageAlert";
 
+declare global {
+  interface Window {
+    // TODO: Complete type declaration
+    zilPay?: {
+      contracts: Contracts;
+      wallet: any;
+    };
+  }
+}
 const FormField = ({
   id,
   label,
@@ -52,12 +63,13 @@ const DropArea = () => {
   );
   const { storeFiles, storeJson } = useStorage();
   const { wallet, callContract } = useWallet();
+  const [minting, setMinting] = useState<boolean>(false);
   // const { callContract } = useZilliqa();
   const [err, setErr] = useState<string | boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setLoading] = useState<string | boolean>(false);
   const [isMinted, setMinted] = useState<string | boolean>(false);
-
+  const zilPay = window.zilPay;
   const {
     register,
     handleSubmit,
@@ -79,6 +91,7 @@ const DropArea = () => {
     }, 30000);
   };
   const onSubmit = handleSubmit(async ({ walletAddress, ...data }) => {
+    setMinting(true);
     //TODO : input validation before creating links
 
     const imageURI = await storeFiles(file);
@@ -99,16 +112,28 @@ const DropArea = () => {
       })
     );
 
+    const message = await transitionMessageAlert(
+      zilPay,
+      tx.ID,
+      "Creating user",
+      setMinting
+    );
+    console.log(message);
     // TODO: Check for transaction conformation
     // console.log("transaction: %o", tx.id);
     // console.log(JSON.stringify(tx.receipt, null, 4));
     try {
       console.log(tx);
+      console.log(tx.isConfirmed);
+      console.log(tx.isLoading);
+      console.log(tx.isPending);
       console.log("HELLO ??");
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
+
     uploadImage();
+
     setMinted(true);
   });
 
@@ -227,7 +252,7 @@ const DropArea = () => {
                 ) : (
                   <Button type="submit" className={styles.uploadButton}>
                     <AiOutlineBlock className="scale-150" />
-                    Mint
+                    {minting ? "Minting" : "Mint"}
                   </Button>
                 )}
               </div>
