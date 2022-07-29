@@ -8,14 +8,10 @@
 @import "./styles/pages/Landing.scss";
 @import "./styles/pages/Profiles.scss";
 @import "./styles/pages/ProfileInfo.scss";
+@import "./styles/pages/CreateProfile.scss";
 //components
 @import "./styles/components/Nav.scss";
-.btn-primary {
-  background-color: #0060bf;
-  padding: 0.5rem 2rem;
-  border-radius: 4px;
-  font-size: 17px;
-}
+
 .nav-link {
   font-weight: 500;
   font-size: 15px;

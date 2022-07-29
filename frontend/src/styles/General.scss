@@ -110,10 +110,13 @@ small,
 // buttons
 .btn {
   display: inline-block;
-  cursor: pointer;
   border-radius: 100px;
+  cursor: pointer;
   text-decoration: none;
+  padding: 0.5rem 2rem;
+  font-size: 17px;
 }
+
 .btn-large,
 a.btn-large {
   padding: 0.9rem 1.9rem;

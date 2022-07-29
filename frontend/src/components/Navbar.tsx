@@ -44,20 +44,20 @@ function Navbar() {
             </Link>
           </li>
           {wallet ? (
-          <div className={cn('flex', 'items-center', 'gap-4')}>
-            <h1 className={cn('lowercase', 'text-white text-lg')}>
-              {walletAddress}
-            </h1>
+            <div className={cn("flex", "items-center", "gap-4")}>
+              <h1 className={cn("lowercase", "text-white text-lg")}>
+                {walletAddress}
+              </h1>
 
-            <Button className="button-primary" onClick={() => disconnect()}>
-              <AiOutlineLogout />
+              <Button className="button-primary" onClick={() => disconnect()}>
+                <AiOutlineLogout />
+              </Button>
+            </div>
+          ) : (
+            <Button className="btn btn-primary" onClick={() => connect()}>
+              Connect <BsWallet className="inline-block wallet-icon" />
             </Button>
-          </div>
-        ) : (
-          <Button onClick={() => connect()}>
-            Connect <BsWallet className="inline-block" />
-          </Button>
-        )}
+          )}
         </ul>
       </div>
     </nav>

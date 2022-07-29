@@ -129,16 +129,19 @@ const ProfileDetail = () => {
                 <Icon icon="brandico:twitter-bird" width="25" />
                 <Icon icon="ci:share" width="22" />
               </div>
-              <a href="/" className="btn btn-primary">
+              <a href="/" className="btn btn-secondary">
                 Earn Now
               </a>
               {allowedToBurn ? (
-          <Button className="button-primary bg-red-600" onClick={() => Burn()}>
-            Burn Profile
-          </Button>
-        ) : (
-          ""
-        )}
+                <Button
+                  className="button-primary bg-red-600"
+                  onClick={() => Burn()}
+                >
+                  Burn Profile
+                </Button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

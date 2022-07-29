@@ -1,8 +1,16 @@
 .hero {
   .left {
+    h6 {
+      background-color: $light-gray;
+      width: fit-content;
+      padding: 5px 12px;
+      padding-right: 9px;
+      border-radius: 100px;
+      font-weight: normal;
+    }
     p {
       max-width: 60%;
-      margin-bottom: calc(1em / 1.5);
+      margin-bottom: calc(1em / 0.7);
     }
   }
 }

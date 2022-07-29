@@ -5,6 +5,19 @@ nav {
     justify-content: space-between;
     align-items: center;
   }
+  button {
+    border: none;
+    margin-left: 10px;
+    text-transform: none !important;
+    letter-spacing: 1.5px !important;
+    border-radius: 100px !important;
+    font-family: "Inter";
+    font-weight: 500;
+    .wallet-icon {
+      margin-top: 1.5px;
+      margin-left: 0.5px;
+    }
+  }
   .nav-logo {
     // h4
     font-size: 1.563rem;

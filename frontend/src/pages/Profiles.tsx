@@ -60,7 +60,7 @@ export default function Profiles() {
         <div className="grid">
           {profiles.map(({ address, profile_uri, data_uri, balance, data }) => (
             <div
-              onClick={() => window.open(`profiles/${address}`)}
+              onClick={() => window.open(`profiles/${address}`, "_self")}
               className="card"
             >
               <div className="card-top">
