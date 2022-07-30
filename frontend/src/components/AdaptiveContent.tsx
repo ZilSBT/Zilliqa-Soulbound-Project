@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ReactComponent as HatIcon } from "../assets/hat.svg";
 import { AdaptiveContentProps } from "../types/types";
 
@@ -13,9 +14,9 @@ const AdaptiveContent: React.FC<AdaptiveContentProps> = ({
         {title}
       </h2>
 
-      <a
+      <Link
         className="block p-8 bg-gray-900 border border-gray-800 shadow-xl rounded-xl"
-        href="/"
+        to="/"
       >
         <div className="w-10 h-10 text-blue-400">
           <HatIcon />
@@ -32,7 +33,7 @@ const AdaptiveContent: React.FC<AdaptiveContentProps> = ({
             <p className="mt-4 text-sm text-gray-300">{subcontent}</p>
           )}
         </div>
-      </a>
+      </Link>
     </section>
   );
 };
