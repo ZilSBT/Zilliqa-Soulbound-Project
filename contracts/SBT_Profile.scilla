@@ -15,6 +15,7 @@ type Operation =
 let zero_address = 0x0000000000000000000000000000000000000000
 let false = False
 let true = True
+let zero_128 = Uint128 0
 let zero = Uint256 0
 let one = Uint256 1
 let two = Uint256 2
@@ -27,6 +28,27 @@ let add_operation = Add
 let sub_operation = Sub
 let min_fee_bps = Uint128 1
 let max_fee_bps = Uint128 10000
+
+(* Error codes *)
+let not_paused_error = Int32 01
+let paused_error = Int32 02
+let self_error = Int32 03
+let not_contract_owner_error = Int32 04 
+let not_minted_error = Int32 05 
+let not_owner_or_operator_error = Int32 06
+let zero_address_destination_error = Int32 07 
+let not_contract_ownership_recipient_error = Int32 08
+let more_than_one_token_error = Int32 09
+let less_than_one_token_error = Int32 10
+let empty_uri_error = Int32 11
+
+(* Success codes *)
+let mint_success = Int32 12
+let burn_success = Int32 13
+let changeProfileURI_success = Int32 14
+let changeDataURI_success = Int32 15
+let earn_achievement_success= Int32 16
+
 
 (* Library functions *)
 let one_msg = 
@@ -46,6 +68,7 @@ let get_bal =
     | None => zero
     | Some bal => bal
     end
+
 
 (* Error exception *)
 type Error =
@@ -136,7 +159,17 @@ field token_uris: Map ByStr20 (Map Uint256 String)
   = Emp ByStr20 (Map Uint256 String)
 
 
-
+(* Procedure for sending a message *)
+procedure send_message (amount: Uint128, code: Int32)
+  msg = {
+    _tag: "";
+    _recipient: _sender;
+    _amount: amount;
+    code: code
+  };
+  msgs = one_msg msg;
+  send msgs
+end
 (* Emit Errors *)
 procedure Throw(error: Error)
   e = make_error error;
@@ -148,6 +181,7 @@ procedure RequireContractOwner()
   match is_contract_owner with
   | True => 
   | False =>
+    send_message zero_128 not_contract_owner_error;
     error = NotContractOwnerError;
     Throw error
   end
@@ -158,6 +192,7 @@ procedure RequireNotSelf(address_a: ByStr20, address_b: ByStr20)
   match is_self with
   | False =>
   | True =>
+    send_message zero_128 self_error;
     error = SelfError;
     Throw error
   end
@@ -167,6 +202,7 @@ procedure RequireSelf(address_a: ByStr20, address_b: ByStr20)
   is_self = builtin eq address_a address_b;
   match is_self with
   | False =>
+    send_message zero_128 self_error;
     error = SelfError;
     Throw error
   | True =>
@@ -181,6 +217,7 @@ procedure RequireNotPaused()
   | False =>
   | True =>
     (* Contract is paused *)
+    send_message zero_128 paused_error;
     error = PausedError;
     Throw error
   end
@@ -214,6 +251,7 @@ procedure SetURI(to: ByStr20, picture_uri: String , data_uri: String)
   match is_empty_string with 
   | True => 
     (* noop *)
+    send_message zero_128 empty_uri_error;
     error = EmptyURI;
     Throw error
   | False =>
@@ -228,6 +266,7 @@ procedure RequireValidDestination(to: ByStr20)
   match is_zero_address with
   | False =>
   | True =>
+    send_message zero_128 zero_address_destination_error;
     error = ZeroAddressDestinationError;
     Throw error
   end
@@ -239,10 +278,11 @@ procedure HasNoToken(to: ByStr20)
   balance = get_bal tokenbalance;
   owns_token = builtin eq balance zero;
   match owns_token with
-  | False => 
+  | False =>
+    send_message zero_128 more_than_one_token_error; 
     error = MoreThanOneTokenError;
     Throw error
-    | True =>
+  | True =>
     (* noop *)
   end
 end
@@ -256,6 +296,7 @@ procedure HasToken(to: ByStr20)
   | False => 
     (* noop *)
     | True =>
+    send_message zero_128 less_than_one_token_error;
     error = LessThanOneTokenError;
     Throw error
   end
@@ -326,18 +367,9 @@ transition Mint(to: ByStr20, picture_uri: String, data_uri: String)
     data_uri: data_uri
   };
   event e;
-
-  msg_to_sender = {
-    _tag: "ZSBT_MintCallback";
-    _recipient: _sender;
-    _amount: Uint128 0;
-    to: to;
-    picture_uri: picture_uri;
-    data_uri: data_uri
-  };
   
-  msgs = one_msg msg_to_sender;
-  send msgs
+  send_message zero_128 mint_success
+ 
 end
 
 
@@ -355,14 +387,7 @@ transition Burn(to: ByStr20)
   HasToken to;
   BurnToken to;
 
-  msg_to_sender = {
-  _tag: "ZSBT_BurnCallback";
-  _recipient: _sender;
-  _amount: Uint128 0;
-  value: to
-  };
-  msgs = one_msg msg_to_sender;
-  send msgs
+  send_message zero_128 burn_success
 end
 
 
@@ -379,14 +404,7 @@ transition ChangeProfilePicture(to: ByStr20 , picture_uri: String)
   (*Check that address has sbt*)
   HasToken to;
   token_uris[to][zero] := picture_uri;
-  msg_to_sender = {
-  _tag: "ZSBT_ChangeProfilePictureCallback";
-  _recipient: _sender;
-  _amount: Uint128 0;
-  value: to
-  };
-  msgs = one_msg msg_to_sender;
-  send msgs
+  send_message zero_128 changeProfileURI_success
 end
 
 (* @param: to  - The address of the profile  *)
@@ -402,14 +420,7 @@ transition ChangeData(to: ByStr20 , data_uri: String)
   (*Check that address has sbt*)
   HasToken to;
   token_uris[to][one] := data_uri;
-  msg_to_sender = {
-  _tag: "ZSBT_ChangeDataeCallback";
-  _recipient: _sender;
-  _amount: Uint128 0;
-  value: to
-  };
-  msgs = one_msg msg_to_sender;
-  send msgs
+  send_message zero_128 changeDataURI_success
 end
 
 (* @param: to  - The address of the profile  *)
@@ -431,15 +442,7 @@ transition Earn_achievement(to: ByStr20 , value: Uint256)
     
   | True =>
     token_uris[to][two]:= one_string;
-    msg_to_sender = {
-        _tag: "ZSBT_EarnAchievementCallback";
-        _recipient: _sender;
-        _amount: Uint128 0;
-        user: to;
-        achievement_earned: value
-        };
-        msgs = one_msg msg_to_sender;
-        send msgs
+    send_message zero_128 earn_achievement_success
   end
 end
 
@@ -478,6 +481,7 @@ transition Unpause()
   match paused with
   | True =>
   | False =>
+    send_message zero_128 not_paused_error;
     error = NotPausedError;
     Throw error
   end;
@@ -535,7 +539,8 @@ transition AcceptContractOwnership()
 
   is_recipient = builtin eq _sender recipient;
   match is_recipient with
-  | False =>    
+  | False =>
+    send_message zero_128 not_contract_ownership_recipient_error;
     error = NotContractOwnershipRecipientError;
     Throw error
   | True =>
