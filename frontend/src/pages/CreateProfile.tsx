@@ -14,7 +14,7 @@ const content: AdaptiveContentProps[] = [
 ];
 const CreateProfile = () => {
   return (
-    <div>
+    <div className="container">
       {content.map((items) => (
         <AdaptiveContent
           title={items.title}

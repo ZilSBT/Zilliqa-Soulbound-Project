@@ -4,6 +4,7 @@ $link-blue: #1da1f2;
 $dark-gray: #262626;
 $medium-gray: #333;
 $light-gray: #424242;
+$red: #ff0000;
 $green: #9ef01a;
 $white: white;
 $white-200: #e6e6e6;
@@ -108,6 +109,11 @@ small,
   color: $white-200;
 }
 // buttons
+button {
+  outline: none;
+  border: none;
+  margin-right: 0 !important;
+}
 .btn {
   display: inline-block;
   border-radius: 100px;
@@ -129,6 +135,10 @@ a.btn-large {
 .btn-secondary {
   background-color: $white;
   color: black;
+}
+.btn-red {
+  background-color: $red;
+  color: white;
 }
 // Card
 .card {

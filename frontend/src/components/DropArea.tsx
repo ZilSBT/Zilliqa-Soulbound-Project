@@ -11,7 +11,7 @@ import Button from "../components/Button";
 import Loader from "../assets/loader.gif";
 import cn from "classnames";
 import Link from "../components/Link";
-
+import { Icon } from "@iconify/react";
 const FormField = ({
   id,
   label,
@@ -25,23 +25,21 @@ const FormField = ({
   errors: any;
 } & React.HTMLProps<HTMLInputElement>) => {
   return (
-    <div className="mb-4">
-      <div className="w-full">
+    <div>
+      <div>
         <label className="block text-white font-bold mb-1 md:mb-0" htmlFor={id}>
           {label}
         </label>
       </div>
-      <div className="md:w-2/3 relative">
-        <input
-          {...register(id)}
-          className="block bg-gray-300 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 invalid:border-red-500"
-          id={id}
-          {...inputProps}
-        ></input>
-        <p className="h-6 absolute top-11 text-xs font-bold text-red-400 transition-all">
-          {errors[id]?.message}
-        </p>
-      </div>
+      <input
+        {...register(id)}
+        className="block appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 invalid:border-red-500"
+        id={id}
+        {...inputProps}
+      ></input>
+      <p className="h-6 absolute top-11 text-xs font-bold text-red-400 transition-all">
+        {errors[id]?.message}
+      </p>
     </div>
   );
 };
@@ -145,30 +143,33 @@ const DropArea = () => {
   };
 
   return (
-    <div className="flex justify-between w-2/3 container mx-auto">
+    <div className="flex justify-between container">
       <div
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => onDrop(e)}
-        className="drag-drop"
+        className="drag-drop drag-droparea"
       >
         {data !== null && (
-          <>
-            <img className={styles.image} src={data?.toString()} alt="" />
-            <button className="form-btn" onClick={() => setData(null)}>
+          <div className="image-dropped">
+            <img src={data?.toString()} alt="" />
+            <button
+              className="btn btn-red btn-large"
+              onClick={() => setData(null)}
+            >
               Remove Image
             </button>
-          </>
+          </div>
         )}
         {data === null && (
-          <p className={styles.dropAreaText}>
+          <p>
             Drag and drop image <FcImageFile className="inline-block" />
           </p>
         )}
       </div>
       {err && <p>Unable to upload image</p>}
       {data !== null && (
-        <div className="mint-form mx-auto flex flex-col justify-center items-center">
-          <form onSubmit={onSubmit} className="w-full">
+        <div className="mint-form flex flex-col justify-center items-center">
+          <form onSubmit={onSubmit}>
             <FormField
               id="walletAddress"
               label="Wallet Address"
@@ -176,8 +177,6 @@ const DropArea = () => {
               errors={errors}
               disabled={wallet}
             />
-            <DropArea />
-
             <FormField
               id="name"
               label="Name"
@@ -195,27 +194,12 @@ const DropArea = () => {
             <div className="md:flex md:items-center">
               <div className=""></div>
               <div className="md:w-2/3">
-                {/* <Button
-                  type="submit"
-                  className={styles.uploadButton}
-                  onClick={() => uploadImage()}
-                >
-                  <AiOutlineBlock className="scale-150" />
-                  Mint
-                </Button> */}
-
+                <DropArea />
                 {isMinted ? (
                   isLoading ? (
                     <div>
                       <img src={Loader} width="50" alt="" />
-                      <div
-                        className={cn(
-                          "text-white",
-                          "font-bold",
-                          "pt-2",
-                          "text-2xl"
-                        )}
-                      >
+                      <div className="text-white font-bold pt-2 text-2xl">
                         Waiting for transaction to reach the network...{"\n"}{" "}
                         Your Sbt will appear among the others shortly.
                       </div>
@@ -226,8 +210,8 @@ const DropArea = () => {
                     </div>
                   )
                 ) : (
-                  <Button type="submit" className={styles.uploadButton}>
-                    <AiOutlineBlock className="scale-150" />
+                  <Button type="submit" className="btn btn-primary btn-large">
+                    <AiOutlineBlock />
                     Mint
                   </Button>
                 )}
