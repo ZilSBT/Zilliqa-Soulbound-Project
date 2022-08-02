@@ -14,7 +14,7 @@ const content: AdaptiveContentProps[] = [
 ];
 const CreateProfile = () => {
   return (
-    <div className="container">
+    <div>
       {content.map((items) => (
         <AdaptiveContent
           title={items.title}
@@ -23,9 +23,7 @@ const CreateProfile = () => {
           subcontent={items.subcontent}
         />
       ))}
-      <div>
-        <DropArea />
-      </div>
+      <DropArea />
     </div>
   );
 };

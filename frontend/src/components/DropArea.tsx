@@ -9,7 +9,6 @@ import { AiOutlineBlock } from "react-icons/ai";
 import { FcImageFile } from "react-icons/fc";
 import Button from "../components/Button";
 import Loader from "../assets/loader.gif";
-import cn from "classnames";
 import Link from "../components/Link";
 import { Icon } from "@iconify/react";
 const FormField = ({
@@ -27,19 +26,12 @@ const FormField = ({
   return (
     <div>
       <div>
-        <label className="block text-white font-bold mb-1 md:mb-0" htmlFor={id}>
+        <label className="block" htmlFor={id}>
           {label}
         </label>
       </div>
-      <input
-        {...register(id)}
-        className="block appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500 invalid:border-red-500"
-        id={id}
-        {...inputProps}
-      ></input>
-      <p className="h-6 absolute top-11 text-xs font-bold text-red-400 transition-all">
-        {errors[id]?.message}
-      </p>
+      <input {...register(id)} className="" id={id} {...inputProps}></input>
+      <p>{errors[id]?.message}</p>
     </div>
   );
 };
@@ -70,7 +62,6 @@ const DropArea = () => {
   }, [setValue, wallet]);
 
   const uploadImage = () => {
-    // Router.push(`/result?url=${imageURI}`);
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -78,9 +69,7 @@ const DropArea = () => {
   };
   const onSubmit = handleSubmit(async ({ walletAddress, ...data }) => {
     //TODO : input validation before creating links
-
     const imageURI = await storeFiles(file);
-
     //TODO , Add additional information such as social media handles.
     const jsonString = JSON.stringify({
       name: `${data.name}`,
@@ -143,19 +132,16 @@ const DropArea = () => {
   };
 
   return (
-    <div className="flex justify-between container">
+    <div className="form-container">
       <div
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => onDrop(e)}
-        className="drag-drop drag-droparea"
+        className="drag-drop"
       >
         {data !== null && (
           <div className="image-dropped">
             <img src={data?.toString()} alt="" />
-            <button
-              className="btn btn-red btn-large"
-              onClick={() => setData(null)}
-            >
+            <button className="btn btn-red" onClick={() => setData(null)}>
               Remove Image
             </button>
           </div>
@@ -168,7 +154,7 @@ const DropArea = () => {
       </div>
       {err && <p>Unable to upload image</p>}
       {data !== null && (
-        <div className="mint-form flex flex-col justify-center items-center">
+        <div className="mint-form">
           <form onSubmit={onSubmit}>
             <FormField
               id="walletAddress"
@@ -191,9 +177,9 @@ const DropArea = () => {
               errors={errors}
             />
 
-            <div className="md:flex md:items-center">
+            <div className="">
               <div className=""></div>
-              <div className="md:w-2/3">
+              <div>
                 <DropArea />
                 {isMinted ? (
                   isLoading ? (
@@ -205,12 +191,12 @@ const DropArea = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex justify-center mt-3">
+                    <div className="">
                       <Link to="/profiles">View Profiles</Link>
                     </div>
                   )
                 ) : (
-                  <Button type="submit" className="btn btn-primary btn-large">
+                  <Button type="submit" className="btn btn-primary">
                     <AiOutlineBlock />
                     Mint
                   </Button>
