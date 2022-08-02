@@ -30,7 +30,7 @@ function Navbar() {
       <div className="container">
         <Link to="/" className="nav-logo">
           Zilsbt
-          <Logo />
+          <Logo id="logo" />
         </Link>
         <ul>
           <li>
@@ -49,13 +49,16 @@ function Navbar() {
                 {walletAddress}
               </h1>
 
-              <Button className="button-primary" onClick={() => disconnect()}>
+              <Button
+                className="btn btn-secondary"
+                onClick={() => disconnect()}
+              >
                 <AiOutlineLogout />
               </Button>
             </div>
           ) : (
             <Button className="btn btn-primary" onClick={() => connect()}>
-              Connect <BsWallet className="inline-block wallet-icon" />
+              Connect <BsWallet className="inline wallet-icon" />
             </Button>
           )}
         </ul>

@@ -77,3 +77,9 @@ section {
 .inline-block {
   display: inline-block;
 }
+
+@media only screen and (max-width: 800px) {
+  section {
+    padding: 5rem 10px;
+  }
+}

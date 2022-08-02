@@ -140,6 +140,7 @@ const DropArea = () => {
       >
         {data !== null && (
           <div className="image-dropped">
+            <h6 className="uppercase">Profile Image</h6>
             <img src={data?.toString()} alt="" />
             <button className="btn btn-red" onClick={() => setData(null)}>
               Remove Image
@@ -156,6 +157,7 @@ const DropArea = () => {
       {data !== null && (
         <div className="mint-form">
           <form onSubmit={onSubmit}>
+            <h6 className="uppercase">Account Info</h6>
             <FormField
               id="walletAddress"
               label="Wallet Address"
