@@ -56,7 +56,11 @@ export default function Profiles() {
   return (
     <section className="profiles">
       <div className="container">
-        <h1 className="uppercase text-center">Profiles</h1>
+        <h1 className="uppercase">Profiles</h1>
+        <div className="profiles-search">
+          <Icon icon="charm:search" color="gray" id="search-icon" />
+          <input type="text" placeholder="Search username..." />
+        </div>
         <div className="grid">
           {profiles.map(({ address, profile_uri, data_uri, balance, data }) => (
             <div

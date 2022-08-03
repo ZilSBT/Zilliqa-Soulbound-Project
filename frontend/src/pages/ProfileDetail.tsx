@@ -132,6 +132,9 @@ const ProfileDetail = () => {
               <a href="/" className="btn btn-secondary">
                 Earn Now
               </a>
+              {/* <a href="/" className="btn btn-red block">
+                Burn Profile
+              </a> */}
               {allowedToBurn ? (
                 <Button
                   className="button-primary bg-red-600"
