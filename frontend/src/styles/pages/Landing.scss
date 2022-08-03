@@ -54,10 +54,12 @@
   .social-proof {
     ul li {
       margin-bottom: 0px;
+      .social-proof-icon {
+        width: 130px;
+      }
     }
   }
-  .why-us .flex,
-  .social-proof .flex {
+  .why-us .flex {
     flex-direction: column;
   }
   .why-us {

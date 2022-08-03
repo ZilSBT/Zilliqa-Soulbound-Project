@@ -116,13 +116,13 @@ export default function Landing() {
         <div className="">
           <ul className="flex flex-between flex-items-center container mx-auto 2xl:px-24 sm:px-6">
             <li>
-              <Gitcoin />
+              <Gitcoin className="social-proof-icon" />
             </li>
             <li>
-              <ZillLogo />
+              <ZillLogo className="social-proof-icon" />
             </li>
             <li className="pr-2">
-              <WebStorage />
+              <WebStorage className="social-proof-icon" />
             </li>
           </ul>
         </div>
