@@ -37,3 +37,36 @@
     gap: 20px;
   }
 }
+@media only screen and (max-width: 800px) {
+  .hero {
+    .btn-primary {
+      margin-bottom: 40px;
+    }
+    .hero-flex {
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .card {
+      width: 100%;
+    }
+  }
+  .social-proof {
+    ul li {
+      margin-bottom: 0px;
+    }
+  }
+  .why-us .flex,
+  .social-proof .flex {
+    flex-direction: column;
+  }
+  .why-us {
+    .card {
+      margin: 0;
+      margin-bottom: 20px;
+    }
+    .card:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
