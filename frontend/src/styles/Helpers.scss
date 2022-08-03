@@ -2,6 +2,9 @@
 .flex {
   display: flex;
 }
+.flex-col {
+  flex-direction: column;
+}
 .flex-between {
   justify-content: space-between;
 }
@@ -35,7 +38,7 @@
 .grid {
   display: grid;
 }
-.grid-auto {
+.grid-auto-3 {
 }
 // margin
 .space-x > * {
@@ -43,6 +46,12 @@
   margin-right: 10px;
 }
 .space-x > :last-child {
+  margin-right: 0;
+}
+.space-y > * {
+  margin-bottom: 5px;
+}
+.space-y > :last-child {
   margin-right: 0;
 }
 // padding

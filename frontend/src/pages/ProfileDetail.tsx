@@ -129,13 +129,18 @@ const ProfileDetail = () => {
                 <Icon icon="brandico:twitter-bird" width="25" />
                 <Icon icon="ci:share" width="22" />
               </div>
-              <a href="/" className="btn btn-secondary">
-                Earn Now
-              </a>
-              {/* <a href="/" className="btn btn-red block">
-                Burn Profile
-              </a> */}
-              {allowedToBurn ? (
+              <div className="flex flex-col space-y">
+                <a href="/" className="btn btn-secondary">
+                  Earn Now
+                </a>
+                <Button
+                  className="btn btn-red block bg-red-600"
+                  onClick={() => Burn()}
+                >
+                  Burn Profile
+                </Button>
+              </div>
+              {/* {allowedToBurn ? (
                 <Button
                   className="button-primary bg-red-600"
                   onClick={() => Burn()}
@@ -144,7 +149,7 @@ const ProfileDetail = () => {
                 </Button>
               ) : (
                 ""
-              )}
+              )} */}
             </div>
           </div>
         </div>
