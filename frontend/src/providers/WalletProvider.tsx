@@ -42,7 +42,7 @@ function WalletProvider({ children }: Props) {
       }
       // TODO: Move contract address to .env
       const contract = await zilPay.contracts.at(
-        "0xb019d93b6ad4b8e7339a1042ede50341a77cca0f"
+        "0xcA556322b3fc4947daE0B9cbbFeB1e2e2425Df4A"
       );
 
       try {

@@ -111,30 +111,15 @@ const DropArea = () => {
         data_uri: ["String", `${nameUri}`],
       })
     );
+    uploadImage();
+    setMinted(true);
+    transitionMessageAlert(zilPay, tx.ID, "Creating user", setMinting);
 
-    const message = await transitionMessageAlert(
-      zilPay,
-      tx.ID,
-      "Creating user",
-      setMinting
-    );
-    console.log(message);
-    // TODO: Check for transaction conformation
-    // console.log("transaction: %o", tx.id);
-    // console.log(JSON.stringify(tx.receipt, null, 4));
     try {
       console.log(tx);
-      console.log(tx.isConfirmed);
-      console.log(tx.isLoading);
-      console.log(tx.isPending);
-      console.log("HELLO ??");
     } catch (error) {
       console.log(error);
     }
-
-    uploadImage();
-
-    setMinted(true);
   });
 
   const onDrop = (e: React.DragEvent) => {

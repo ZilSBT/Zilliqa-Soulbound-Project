@@ -30,15 +30,15 @@ let min_fee_bps = Uint128 1
 let max_fee_bps = Uint128 10000
 
 (* Error codes *)
-let not_paused_error = Int32 01
-let paused_error = Int32 02
-let self_error = Int32 03
-let not_contract_owner_error = Int32 04 
-let not_minted_error = Int32 05 
-let not_owner_or_operator_error = Int32 06
-let zero_address_destination_error = Int32 07 
-let not_contract_ownership_recipient_error = Int32 08
-let more_than_one_token_error = Int32 09
+let not_paused_error = Int32 1
+let paused_error = Int32 2
+let self_error = Int32 3
+let not_contract_owner_error = Int32 4 
+let not_minted_error = Int32 5 
+let not_owner_or_operator_error = Int32 6
+let zero_address_destination_error = Int32 7 
+let not_contract_ownership_recipient_error = Int32 8
+let more_than_one_token_error = Int32 9
 let less_than_one_token_error = Int32 10
 let empty_uri_error = Int32 11
 

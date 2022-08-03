@@ -20,7 +20,7 @@ const ProfileDetail = () => {
   const getZBTStates = useCallback(async () => {
     if (address) {
       const states = await zilliqa.contracts
-        .at("0xb019d93b6ad4b8e7339a1042ede50341a77cca0f")
+        .at("0xcA556322b3fc4947daE0B9cbbFeB1e2e2425Df4A")
         .getState();
 
       const balance = await zilliqa.blockchain.getBalance(address);
