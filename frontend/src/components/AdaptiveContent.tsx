@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { ReactComponent as HatIcon } from "../assets/hat.svg";
+// import { Link } from "react-router-dom";
+// import { ReactComponent as HatIcon } from "../assets/hat.svg";
 import { AdaptiveContentProps } from "../types/types";
 
 const AdaptiveContent: React.FC<AdaptiveContentProps> = ({
@@ -13,7 +13,7 @@ const AdaptiveContent: React.FC<AdaptiveContentProps> = ({
       <div className="container">
         <h1>Sign up now</h1>
         <p>
-          Already have an account? <a href="">Sign in here</a>
+          Already have an account? <a href="/">Sign in here</a>
         </p>
       </div>
     </section>
