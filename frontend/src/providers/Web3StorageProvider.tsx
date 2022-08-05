@@ -7,9 +7,9 @@ import {
   useState,
   ReactNode,
   useCallback,
-} from 'react';
-import { Web3Storage } from 'web3.storage';
-import { v4 as uuidv4 } from 'uuid';
+} from "react";
+import { Web3Storage } from "web3.storage";
+import { v4 as uuidv4 } from "uuid";
 
 interface StorageProviderContextValue {
   web3storage: Web3Storage;
@@ -25,11 +25,11 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!WEB3STORAGE_API_KEY) {
-      throw new Error('WEB3STorage API keys not provided!');
+      throw new Error("WEB3STorage API keys not provided!");
     }
     const web3storageclient = new Web3Storage({
       token: WEB3STORAGE_API_KEY!,
-      endpoint: new URL('https://api.web3.storage'),
+      endpoint: new URL("https://api.web3.storage"),
     });
     setweb3storageClient(web3storageclient);
   }, []);
@@ -37,7 +37,7 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
   const storeFiles = useCallback(
     async (file: any) => {
       if (web3storageClient) {
-        const ext = file.name.split('.').pop();
+        const ext = file.name.split(".").pop();
         const fileName = `${uuidv4()}.${ext}`;
         const newFile = new File([file], fileName, { type: file.type });
         const cid = await web3storageClient.put([newFile], {
@@ -47,13 +47,13 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
         return imageURI;
       }
     },
-    [web3storageClient],
+    [web3storageClient]
   );
 
   const storeJson = useCallback(
     async (file: any) => {
       if (web3storageClient) {
-        const ext = 'json';
+        const ext = "json";
         const fileName = `${uuidv4()}.${ext}`;
         const newFile = new File([file], fileName, { type: file.type });
         const cid = await web3storageClient.put([newFile], {
@@ -63,7 +63,7 @@ const StorageProvider = ({ children }: { children: ReactNode }) => {
         return imageURI;
       }
     },
-    [web3storageClient],
+    [web3storageClient]
   );
 
   const value = useMemo(() => {

@@ -43,10 +43,14 @@ const ProfileDetail = () => {
       } catch (err) {
         console.log(err);
       }
-      const userData = await fetch(states.token_uris[address][1]).then((res) =>
-        res.json()
-      );
-      setDescription(userData.id);
+      try {
+        const userData = await fetch(states.token_uris[address][1]).then(
+          (res) => res.json()
+        );
+        setDescription(userData.id);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [address, zilliqa.contracts, zilliqa.blockchain]);
 

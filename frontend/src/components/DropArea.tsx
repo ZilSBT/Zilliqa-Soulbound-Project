@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
 import { useStorage } from "../providers/Web3StorageProvider";
 import { useWallet } from "../providers/WalletProvider";
 import { useForm } from "react-hook-form";
@@ -10,7 +10,8 @@ import { FcImageFile } from "react-icons/fc";
 import Button from "../components/Button";
 import Loader from "../assets/loader.gif";
 import Link from "../components/Link";
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
+import transitionMessageAlert from "../functions/transitionMessageAlert";
 const FormField = ({
   id,
   label,
@@ -42,12 +43,13 @@ const DropArea = () => {
   );
   const { storeFiles, storeJson } = useStorage();
   const { wallet, callContract } = useWallet();
+  const [minting, setMinting] = useState<boolean>(false);
   // const { callContract } = useZilliqa();
   const [err, setErr] = useState<string | boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setLoading] = useState<string | boolean>(false);
   const [isMinted, setMinted] = useState<string | boolean>(false);
-
+  const zilPay = window.zilPay;
   const {
     register,
     handleSubmit,
@@ -63,11 +65,13 @@ const DropArea = () => {
 
   const uploadImage = () => {
     setLoading(true);
+    console.log(minting);
     setTimeout(() => {
       setLoading(false);
     }, 30000);
   };
   const onSubmit = handleSubmit(async ({ walletAddress, ...data }) => {
+    setMinting(true);
     //TODO : input validation before creating links
     const imageURI = await storeFiles(file);
     //TODO , Add additional information such as social media handles.
@@ -86,16 +90,28 @@ const DropArea = () => {
       })
     );
 
+    const message = await transitionMessageAlert(
+      zilPay,
+      tx.ID,
+      "Creating user",
+      setMinting
+    );
+    console.log(message);
     // TODO: Check for transaction conformation
     // console.log("transaction: %o", tx.id);
     // console.log(JSON.stringify(tx.receipt, null, 4));
     try {
       console.log(tx);
+      console.log(tx.isConfirmed);
+      console.log(tx.isLoading);
+      console.log(tx.isPending);
       console.log("HELLO ??");
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
+
     uploadImage();
+
     setMinted(true);
   });
 

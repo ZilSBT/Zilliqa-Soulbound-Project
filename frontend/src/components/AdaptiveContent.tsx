@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ReactComponent as HatIcon } from "../assets/hat.svg";
 import { AdaptiveContentProps } from "../types/types";
 

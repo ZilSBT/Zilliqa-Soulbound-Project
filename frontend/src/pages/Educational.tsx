@@ -48,6 +48,7 @@ export default function Educational() {
 
           {content.map((items) => (
             <AdaptiveContent
+              key={items.title}
               title={items.title}
               subtitle={items.subtitle}
               content={items.content}

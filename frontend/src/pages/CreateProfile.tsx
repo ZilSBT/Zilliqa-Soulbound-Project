@@ -17,6 +17,7 @@ const CreateProfile = () => {
     <div>
       {content.map((items) => (
         <AdaptiveContent
+          key={items.title}
           title={items.title}
           subtitle={items.subtitle}
           content={items.content}

@@ -53,8 +53,8 @@ Email: imyosh4@gmail.com
 Github: @imyosh https://github.com/imyosh
 
 ### John
-Email:
-Github:
+Email: johnmontejano2@gmail.com
+Github: @johnmontejano
 
 ## Features
 
