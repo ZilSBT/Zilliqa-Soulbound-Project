@@ -69,12 +69,11 @@ export default function Profiles() {
           />
         </div>
         <div className="grid">
-          {profiles.map(({ address, profile_uri, data_uri, balance, data }) => {
-            if (
-              data.name
-                .toLocaleLowerCase()
-                .includes(searchStr.toLocaleLowerCase())
-            ) {
+          {profiles
+            .filter(({ data }) =>
+              data.name.toLowerCase().includes(searchStr.toLowerCase())
+            )
+            .map(({ address, profile_uri, data_uri, balance, data }) => {
               return (
                 <div
                   onClick={() => window.open(`profiles/${address}`, "_self")}
@@ -116,8 +115,7 @@ export default function Profiles() {
                   </div>
                 </div>
               );
-            }
-          })}
+            })}
         </div>
       </div>
     </section>
