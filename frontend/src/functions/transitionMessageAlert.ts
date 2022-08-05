@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import decodeMessage from "./decodeMessage";
+import { decodeZilPayError } from "./decodeMessage";
 
 /*
 Creates a toast using react-hot-toast,
@@ -14,33 +15,39 @@ const transitionMessageAlert = async (
   transitionName: string,
   loader: any
 ) => {
-  console.log("Ivan wants to say log ");
   const transition = new Promise<string>((success, error) => {
     console.log("Inside the promise");
     const subscription = zilPay.wallet
       .observableTransaction(transactionId)
       .subscribe(async (hash: any) => {
         loader(false);
-        console.log("Subscribe exe");
         subscription.unsubscribe();
-        // // debugger;
         try {
-          const Tx = await zilPay.blockchain.getTransaction(hash[0]);
-          const code = Tx.receipt.transitions[0].msg.params[0].value;
-          const message = decodeMessage(code);
-          console.log(message);
-          if (message.type === "success") {
-            success(message.alert);
+          const Tx = await zilPay.blockchain.getTransaction(hash);
+          if (Tx.success) {
+            const code = Tx.receipt.transitions[0].msg.params[0].value;
+            const message = decodeMessage(code);
+            //TODO Handle the success
+            console.log(message);
+            if (message.type === "success") {
+              success(message.alert);
+            }
+            error(message.alert);
+          } else {
+            //TODO : HANDLE Error state
+            console.log("error state");
+
+            const error_message = Tx.exceptions[0].message;
+            const code = error_message.slice(-5, -4); //Extract error code .
+            const message = decodeMessage(code);
+            console.log(message);
           }
-          error(message.alert);
-        } catch (err) {
+        } catch (err: any) {
           error("Transaction error");
+          toast.error(decodeZilPayError(err));
         }
       });
   });
-  // const variable = await transition;
-  // return variable;
-
   toast.promise(transition, {
     loading: `${transitionName}`,
     success: (message: string) => message,
