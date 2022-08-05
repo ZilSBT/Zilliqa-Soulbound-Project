@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;500;700;800&display=swap");
+@import "./styles/General.scss";
+@import "./styles/Helpers.scss";
+// pages
+@import "./styles/pages/Landing.scss";
+@import "./styles/pages/Profiles.scss";
+@import "./styles/pages/ProfileInfo.scss";
+@import "./styles/pages/CreateProfile.scss";
+//components
+@import "./styles/components/Nav.scss";
+
+.nav-link {
+  font-weight: 500;
+  font-size: 15px;
+  color: #e6e6e6;
+  margin-left: 1rem;
+  margin-top: 3px;
+}
+/* tablets and below */
+@media only screen and (max-width: 900px) {
+  .profile-img {
+    width: 180px;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+  }
+  .social-bar {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .social-bar > * {
+    margin-bottom: 0.1rem;
+  }
+  /* hero */
+  /* social proof */
+  .social-proof ul li svg {
+    width: 150px;
+  }
+}
+/* educate page */
+.zsbt-logo img {
+  width: 100vw;
+  height: 400px;
+  object-fit: cover;
+  object-position: -10px -890px;
+  filter: brightness(90%);
+}
+
+// containers

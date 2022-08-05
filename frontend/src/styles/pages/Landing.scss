@@ -1,0 +1,74 @@
+.hero {
+  .left {
+    h6 {
+      background-color: $light-gray;
+      width: fit-content;
+      padding: 5px 12px;
+      padding-right: 9px;
+      border-radius: 100px;
+      font-weight: normal;
+    }
+    p {
+      max-width: 60%;
+      margin-bottom: calc(1em / 0.7);
+    }
+  }
+}
+
+// social proof
+.social-proof {
+  padding: 0.8rem 30px;
+  background-color: $medium-gray;
+  svg {
+    width: 250px;
+  }
+}
+// why us
+.why-us {
+  .flex {
+    margin-bottom: 2rem;
+  }
+}
+//featured profiles
+.featured {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .hero {
+    .btn-primary {
+      margin-bottom: 40px;
+    }
+    .hero-flex {
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .card {
+      width: 100%;
+    }
+  }
+  .social-proof {
+    ul li {
+      margin-bottom: 0px;
+      .social-proof-icon {
+        width: 130px;
+      }
+    }
+  }
+  .why-us .flex {
+    flex-direction: column;
+  }
+  .why-us {
+    .card {
+      margin: 0;
+      margin-bottom: 20px;
+    }
+    .card:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

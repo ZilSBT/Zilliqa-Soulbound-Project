@@ -1,0 +1,68 @@
+// ****MOBILE-FIRST****
+
+.create-profile {
+  p {
+    width: 350px;
+    max-width: 400px;
+  }
+}
+
+// mint form
+.mint-form {
+  background-color: $medium-gray;
+  form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $medium-gray;
+    align-items: stretch;
+  }
+  form input {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    background-color: $light-gray;
+    color: white;
+    font-size: 16px;
+  }
+  form label {
+    font-weight: 300;
+    margin-bottom: 5px;
+  }
+}
+.image-dropped,
+.mint-form form {
+  padding: 40px 80px;
+}
+.image-dropped {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  img {
+    height: 150px;
+    width: 150px;
+    border-radius: 800px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+}
+.form-container {
+  max-width: 100%;
+  margin: 0 auto;
+  h6 {
+    margin-bottom: 30px;
+  }
+  div.drag-drop {
+    background-color: $light-gray;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

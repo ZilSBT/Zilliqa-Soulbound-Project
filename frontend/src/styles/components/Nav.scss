@@ -1,0 +1,78 @@
+nav {
+  padding: 30px 30px;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  button {
+    border: none;
+    margin-left: 10px;
+    text-transform: none !important;
+    letter-spacing: 0.6px !important;
+    border-radius: 100px !important;
+    font-family: "Inter";
+    font-weight: 500;
+    margin-top: 5px;
+    .wallet-icon {
+      margin-left: 0.5px;
+    }
+  }
+  .nav-logo {
+    // h4
+    font-size: 1.563rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $white;
+    font-style: italic;
+    font-weight: 700;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    list-style-type: none;
+    li {
+      margin-top: 12px;
+    }
+    margin: 0;
+    a {
+      text-decoration: none;
+    }
+  }
+}
+.logo {
+  margin-left: 1rem;
+  display: inline-block;
+  margin-bottom: -8px;
+}
+@media only screen and (max-width: 800px) {
+  nav {
+    padding: 15px 10px;
+    .nav-logo {
+      display: inline;
+      font-size: 20px;
+    }
+    #logo {
+      font-size: 12px;
+      width: 30px;
+      margin-top: 5px;
+      margin-left: 8px;
+    }
+    button {
+      border: none;
+      margin-left: 10px;
+      text-transform: none !important;
+      letter-spacing: 0.6px !important;
+      border-radius: 100px !important;
+      font-family: "Inter";
+      font-weight: 500;
+      font-size: 16px !important;
+      .wallet-icon {
+        margin-top: 3.5px;
+        margin-left: 0.5px;
+      }
+    }
+  }
+}

@@ -16,10 +16,7 @@ interface StorageProviderContextValue {
   storeFiles: (file: any) => Promise<String | undefined>;
   storeJson: (file: any) => Promise<String | undefined>;
 }
-// let CONTRACT_ADDRESS: any = process.env.REACT_APP_CONTRACT_ADDRESS;
-
 const WEB3STORAGE_API_KEY = process.env.REACT_APP_WEB3_STORAGE_API_KEY;
-
 const StorageContext = createContext<StorageProviderContextValue>(null as any);
 
 const StorageProvider = ({ children }: { children: ReactNode }) => {
