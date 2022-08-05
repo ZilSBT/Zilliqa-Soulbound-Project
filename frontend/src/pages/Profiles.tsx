@@ -8,7 +8,8 @@ import { Icon } from "@iconify/react";
 import { ReactComponent as Zill } from "../assets/zill.svg";
 export default function Profiles() {
   const { zilliqa } = useZilliqa();
-  const [profiles, setProfiles] = useState<Profile[] | null>(null);
+  const [searchStr, setSearch] = useState<string>("");
+  const [profiles, setProfiles] = useState<Profile[] | null>([]);
 
   const getZBTStates = useCallback(async () => {
     const states = await zilliqa.contracts
@@ -51,6 +52,10 @@ export default function Profiles() {
     getZBTStates();
   }, [getZBTStates]);
 
+  const filtered = profiles?.filter(({ data }) =>
+    data.name.toLowerCase().includes(searchStr.toLowerCase())
+  );
+
   if (!profiles) return <div>Loading...</div>;
 
   return (
@@ -59,46 +64,64 @@ export default function Profiles() {
         <h1 className="uppercase">Profiles</h1>
         <div className="profiles-search">
           <Icon icon="charm:search" color="gray" id="search-icon" />
-          <input type="text" placeholder="Search username..." />
+          <input
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            type="text"
+            placeholder="Search username..."
+          />
         </div>
         <div className="grid">
-          {profiles.map(({ address, profile_uri, data_uri, balance, data }) => (
-            <div
-              onClick={() => window.open(`profiles/${address}`, "_self")}
-              className="card"
-            >
-              <div className="card-top">
-                <img className="radius-full center" src={profile_uri} alt="" />
-              </div>
-              <div className="card-bottom card-container">
-                <div className="flex flex-between flex-items-center">
-                  <div>
-                    <h3>@{data?.name}</h3>
-                    <p>
-                      <Icon
-                        icon="entypo:wallet"
-                        width="25"
-                        className="inline"
-                      />
-                      {String(address).substring(0, 6) +
-                        "..." +
-                        String(address).substring(38)}
-                    </p>
-                    <p>
-                      <Zill />
-                      {balance}
-                    </p>
-                  </div>
-                  <a
-                    className="text-white"
-                    href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20profile%20on%20Zilsbt%3A%0A%0Ahttp%3A//localhost%3A3000/profiles/${address}`}
+          {filtered && filtered.length !== 0 ? (
+            filtered?.map(
+              ({ address, profile_uri, data_uri, balance, data }) => {
+                return (
+                  <div
+                    onClick={() => window.open(`profiles/${address}`, "_self")}
+                    className="card"
                   >
-                    <Icon icon="ci:share" width="30" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
+                    <div className="card-top">
+                      <img
+                        className="radius-full center"
+                        src={profile_uri}
+                        alt=""
+                      />
+                    </div>
+                    <div className="card-bottom card-container">
+                      <div className="flex flex-between flex-items-center">
+                        <div>
+                          <h3>@{data?.name}</h3>
+                          <p>
+                            <Icon
+                              icon="entypo:wallet"
+                              width="25"
+                              className="inline"
+                            />
+                            {String(address).substring(0, 6) +
+                              "..." +
+                              String(address).substring(38)}
+                          </p>
+                          <p>
+                            <Zill />
+                            {balance}
+                          </p>
+                        </div>
+                        <a
+                          className="text-white"
+                          href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20profile%20on%20Zilsbt%3A%0A%0Ahttp%3A//localhost%3A3000/profiles/${address}`}
+                        >
+                          <Icon icon="ci:share" width="30" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            )
+          ) : (
+            <div>No Result Found</div>
+          )}
         </div>
       </div>
     </section>
